@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePisitionTable extends Migration
+class CreatePositionTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreatePisitionTable extends Migration
      */
     public function up()
     {
-        Schema::create('pisition', function (Blueprint $table) {
+        Schema::create('position', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->timestamps();

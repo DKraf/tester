@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Company extends Model
 {
     use HasFactory;
+    protected $table = 'company';
 
     /**
      * Атрибуты, которые можно назначать массово.
