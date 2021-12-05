@@ -68,7 +68,7 @@ class TestTypeController extends Controller
 
         TestType::create($request->all());
 
-        return redirect()->route('testtype.index')
+        return redirect()->route('test-type.index')
             ->with('Тип тестов успешно добавлен.');
     }
 
@@ -123,21 +123,21 @@ class TestTypeController extends Controller
 
         $test_type->update($request->all());
 
-        return redirect()->route('company.index')
+        return redirect()->route('test-type.index')
             ->with('Тип теста успешно обновлен');
     }
 
     /**
      * Удалить указанный ресурс из хранилища.
      *
-     * @param Сompany $company
+     * @param TestType $company
      * @return \Illuminate\Http\Response
      */
     public function destroy(TestType $test_type)
     {
         $test_type->delete();
 
-        return redirect()->route('testtype.index')
+        return redirect()->route('test-type.index')
             ->with('Тип теста успешно удален');
     }
 }

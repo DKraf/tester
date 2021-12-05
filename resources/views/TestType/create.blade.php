@@ -4,10 +4,10 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Добавить должность:</h2>
+                <h2>Добавить тип теста:</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('position.index') }}">
+                <a class="btn btn-primary" href="{{ route('test-type.index') }}">
                     <i class="bi bi-arrow-return-left"></i>
                 </a>
             </div>
@@ -25,20 +25,32 @@
         </div>
     @endif
 
-    <form action="{{ route('position.store') }}" method="POST">
+    <form action="{{ route('test-type.store') }}" method="POST">
         @csrf
 
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>Должность:</strong>
+                    <strong>Наименование:</strong>
                     <input type="text" name="name" class="form-control" placeholder="Наименование">
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>Детали:</strong>
-                    <textarea class="form-control" style="height:150px" name="detail" placeholder="Детали"></textarea>
+                    <strong>Колличество вопросов:</strong>
+                    <input type="text" name="questions_count" class="form-control" placeholder="10">
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Минимальное колличество правильных ответов:</strong>
+                    <input type="text" name="min_question_count" class="form-control" placeholder="10">
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Время теста (в минутах):</strong>
+                    <input type="text" name="time_for_testing" class="form-control" placeholder="60">
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">

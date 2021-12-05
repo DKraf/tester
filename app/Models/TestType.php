@@ -10,6 +10,11 @@ class TestType extends Model
     use HasFactory;
 
     /**
+     * @var string
+     */
+    protected $table = 'test_type';
+
+    /**
      * Атрибуты, которые можно назначать массово.
      *
      * @var array

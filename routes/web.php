@@ -4,6 +4,7 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\PositionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\TestTypeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
