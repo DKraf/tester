@@ -4,10 +4,10 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Информации о роли:</h2>
+                <h2> Информация о компании:</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('roles.index') }}">
+                <a class="btn btn-primary" href="{{ route('company.index') }}">
                     <i class="bi bi-arrow-return-left"></i>
                 </a>
             </div>
@@ -18,17 +18,25 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Наименование:</strong>
-                {{ $role->name }}
+                {{ $company->name }}
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Права:</strong>
-                @if(!empty($rolePermissions))
-                    @foreach($rolePermissions as $v)
-                        <label class="label label-success">{{ $v->name }},</label>
-                    @endforeach
-                @endif
+                <strong>БИН:</strong>
+                {{ $company->bin }}
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Тел:</strong>
+                {{ $company->tel_number }}
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Адрес:</strong>
+                {{ $company->legal_address }}
             </div>
         </div>
     </div>

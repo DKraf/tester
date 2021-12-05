@@ -4,10 +4,10 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Редактирование должности:</h2>
+                <h2>Добавить компанию:</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('position.index') }}">
+                <a class="btn btn-primary" href="{{ route('company.index') }}">
                     <i class="bi bi-arrow-return-left"></i>
                 </a>
             </div>
@@ -25,21 +25,32 @@
         </div>
     @endif
 
-    <form action="{{ route('position.update',$position->id) }}" method="POST">
+    <form action="{{ route('company.store') }}" method="POST">
         @csrf
-        @method('PUT')
 
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>Должность:</strong>
-                    <input type="text" name="name" value="{{ $position->name }}" class="form-control" placeholder="Name">
+                    <strong>Наименование:</strong>
+                    <input type="text" name="name" class="form-control" placeholder="Наименование">
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>Детали:</strong>
-                    <textarea class="form-control" style="height:150px" name="detail" placeholder="Detail">{{ $position->detail }}</textarea>
+                    <strong>БИН:</strong>
+                    <input type="text" name="bin" class="form-control" placeholder="БИН организации">
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Адрес:</strong>
+                    <input type="text" name="legal_address" class="form-control" placeholder="Адрес">
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Телефон:</strong>
+                    <input type="text" name="tel_number" class="form-control" placeholder="Номер телефона">
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">

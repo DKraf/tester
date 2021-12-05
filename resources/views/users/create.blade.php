@@ -49,6 +49,12 @@
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
+                <strong>Логин:</strong>
+                {!! Form::text('login', null, array('placeholder' => 'Логин','class' => 'form-control')) !!}
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
                 <strong>Email:</strong>
                 {!! Form::text('email', null, array('placeholder' => 'Email','class' => 'form-control')) !!}
             </div>
@@ -56,13 +62,13 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Пароль:</strong>
-                {!! Form::password('password', array('placeholder' => 'Пароль','class' => 'form-control')) !!}
+                {!! Form::text('password', $pass, array('value'  => $pass,'class' => 'form-control')) !!}
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Повторите пароль:</strong>
-                {!! Form::password('confirm-password', array('placeholder' => 'Повторите пароль','class' => 'form-control')) !!}
+                {!! Form::text('confirm-password', $pass, array('value' => $pass,'class' => 'form-control')) !!}
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">

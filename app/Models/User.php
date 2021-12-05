@@ -23,6 +23,7 @@ class User extends Authenticatable
         'patronymic',
         'company_id',
         'position_id',
+        'password',
         'email',
         'login'
     ];

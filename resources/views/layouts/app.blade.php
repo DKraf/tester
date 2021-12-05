@@ -31,7 +31,7 @@
                 <a class="list-group-item list-group-item-action list-group-item-light p-3 " href="/users"><i class="bi bi-people"></i> Пользователи</a>
                 <a class="list-group-item list-group-item-action list-group-item-light p-3 " href="/roles"><i class="bi bi-person-check"></i> Роли</a>
                 <a class="list-group-item list-group-item-action list-group-item-light p-3 " href="/position"><i class="bi bi-mortarboard"></i> Должности</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3 " href="/companies"><i class="bi bi-building"></i> Компании</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3 " href="/company"><i class="bi bi-building"></i> Компании</a>
                 <a class="list-group-item list-group-item-action list-group-item-light p-3 " href="/roles"><i class="bi bi-clipboard-data"></i> Виды тестов</a>
                 <a class="list-group-item list-group-item-action list-group-item-light p-3 " href="/users"><i class="bi bi-patch-question"></i> Тематики</a>
                 <a class="list-group-item list-group-item-action list-group-item-light p-3 " href="/roles"><i class="bi bi-card-checklist"></i> Тесты</a>

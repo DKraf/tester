@@ -40,7 +40,8 @@ class UserController extends Controller
         $roles = Role::pluck('name','name')->all();
         $position = Position::pluck('name','id')->toArray();;
         $company = Company::pluck('name','id')->all();
-        return view('users.create',compact('roles','position','company'));
+        $pass = uniqid();
+        return view('users.create',compact('roles','position','company','pass'));
     }
 
     /**
@@ -56,7 +57,7 @@ class UserController extends Controller
             'last_name' => 'required',
             'company_id' => 'required',
             'position_id' => 'required',
-            'email' => 'required|email|unique:users,email',
+            'login' => 'required|unique:users,login',
             'password' => 'required|same:confirm-password',
             'roles' => 'required'
         ],
@@ -65,9 +66,9 @@ class UserController extends Controller
             'last_name.required' => 'Фамилия должна быть заполненна',
             'company_id.required' => 'Компания не выбранна',
             'position_id.required' => 'Должность не выбранна',
-            'email.required' => 'email не заполнен',
+            'login.required' => 'login не заполнен',
             'email.email' => 'email не соответсвует формату',
-            'email.unique' => 'Указанный Email уже существует',
+            'login.unique' => 'Указанный login уже существует',
             'password.required' => 'Пароль не заполнен',
             'password.same' => 'Пароли не совпадают',
             'roles.required' => 'Роль не выбранна',

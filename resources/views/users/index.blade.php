@@ -39,7 +39,7 @@
                 <td>{{ $user->patronymic }}</td>
                 <td>{{ $user->email }}</td>
                 <td>{{ $user->company_name }}</td>
-                <td>{{ $user->position_name  }}</td>
+                <td>{{ $user->company  }}</td>
 
                 <td>
                     <a class="btn btn-info btn-sm" href="{{ route('users.show',$user->id) }}">

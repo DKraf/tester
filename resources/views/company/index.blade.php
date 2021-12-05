@@ -4,11 +4,11 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Должности:</h2>
+                <h2>Компании:</h2>
             </div>
             <div class="pull-right">
-                @can('position-create')
-                    <a class="btn btn-success" href="{{ route('position.create') }}">
+                @can('company-create')
+                    <a class="btn btn-success" href="{{ route('company.create') }}">
                         <i class="bi bi-plus-square"></i>
                     </a>
                 @endcan
@@ -25,29 +25,31 @@
        <table class="table table-bordered table-striped">
            <tr>
                <th>№</th>
-               <th>Должность</th>
-               <th>Детали</th>
+               <th>Наименование</th>
+               <th>БИН</th>
+               <th>Тел:</th>
                <th width="280px">Действия</th>
            </tr>
-           @foreach ($data as $position)
+           @foreach ($data as $company)
                <tr>
                    <td>{{ ++$i }}</td>
-                   <td>{{ $position->name }}</td>
-                   <td>{{ $position->detail }}</td>
+                   <td>{{ $company->name }}</td>
+                   <td>{{ $company->bin }}</td>
+                   <td>{{ $company->tel_number }}</td>
                    <td>
-                       <form action="{{ route('position.destroy',$position->id) }}" method="POST">
-                           <a class="btn btn-info" href="{{ route('position.show',$position->id) }}">
+                       <form action="{{ route('company.destroy',$company->id) }}" method="POST">
+                           <a class="btn btn-info" href="{{ route('company.show',$company->id) }}">
                                <i class="bi bi-binoculars"></i>
                            </a>
-                           @can('position-edit')
-                               <a class="btn btn-primary" href="{{ route('position.edit',$position->id) }}">
+                           @can('company-edit')
+                               <a class="btn btn-primary" href="{{ route('company.edit',$company->id) }}">
                                    <i class="bi bi-pencil"></i>
                                </a>
                            @endcan
 
                            @csrf
                            @method('DELETE')
-                           @can('position-delete')
+                           @can('company-delete')
                                <button type="submit" class="btn btn-danger">
                                    <i class="bi bi-x-circle"></i>
                                </button>
@@ -58,9 +60,9 @@
            @endforeach
        </table>
     @else
-        <p class="text-center text-danger">Пока нет ни одной должности!</p>
+        <p class="text-center text-danger">Пока нет ни одной компании!</p>
     @endif
        {!! $data->links() !!}
 
-    <p class="text-center text-primary"><small>	&#169 2021.  ТОО "Инженер-2015"</small></p>
+       <p class="text-center text"><small>	&#169 2021.  ТОО "Инженер-2015"</small></p>
    @endsection

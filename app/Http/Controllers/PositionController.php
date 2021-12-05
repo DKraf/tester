@@ -19,10 +19,12 @@ class PositionController extends Controller
         $this->middleware('permission:position-edit', ['only' => ['edit','update']]);
         $this->middleware('permission:position-delete', ['only' => ['destroy']]);
     }
+
+
     /**
      * Отобразить список ресурсов.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function index()
     {
@@ -30,6 +32,7 @@ class PositionController extends Controller
         return view('Position.index',compact('data'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
+
 
     /**
      * Отобразить форму для создания нового ресурса.
@@ -40,6 +43,7 @@ class PositionController extends Controller
     {
         return view('position.create');
     }
+
 
     /**
      * Поместить только что созданный ресурс в хранилище.
@@ -56,7 +60,7 @@ class PositionController extends Controller
         Position::create($request->all());
 
         return redirect()->route('position.index')
-            ->with('success','Product created successfully.');
+            ->with('Должность успешно создана');
     }
 
     /**
@@ -70,26 +74,29 @@ class PositionController extends Controller
         return view('position.show',compact('position'));
     }
 
+
     /**
      * Отобразить форму для редактирования указанного
      * ресурса.
      *
-     * @param  \App\Position  $product
+     * @param  \App\Position  $position
      * @return \Illuminate\Http\Response
      */
-    public function edit(Position $product)
+    public function edit(Position $position)
     {
+
         return view('position.edit',compact('position'));
     }
+
 
     /**
      * Обновить указанный ресурс в хранилище.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Position  $position
-     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request $request
+     * @param Product $position
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, Product $position)
+    public function update(Request $request, Position $position)
     {
         request()->validate([
             'name' => 'required'
@@ -98,7 +105,7 @@ class PositionController extends Controller
         $position->update($request->all());
 
         return redirect()->route('position.index')
-            ->with('success','Product updated successfully');
+            ->with('Должность успешно обновлена');
     }
 
     /**
@@ -112,6 +119,6 @@ class PositionController extends Controller
         $position->delete();
 
         return redirect()->route('position.index')
-            ->with('success','Product deleted successfully');
+            ->with('Должность успешно удалена');
     }
 }
