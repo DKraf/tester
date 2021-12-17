@@ -15,7 +15,6 @@ class CreateTestThemeTable extends Migration
     {
         Schema::create('test_theme', function (Blueprint $table) {
             $table->id();
-            $table->integer('test_type_id');
             $table->string('name');
             $table->timestamps();
         });

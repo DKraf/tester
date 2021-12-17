@@ -25,9 +25,9 @@ class UserController extends Controller
             ->leftJoin('position', 'users.position_id', '=', 'position.id')
             ->leftJoin('company', 'users.company_id', '=', 'company.id')
             ->select('users.*', 'position.name as position_name', 'company.name as company_name')
-            ->paginate(30);
+            ->paginate(1);
         return view('users.index',compact('data'))
-            ->with('i', ($request->input('page', 1) - 1) * 5);
+            ->with('i', ($request->input('page', 1) - 1) * 1);
     }
 
     /**
@@ -131,7 +131,6 @@ class UserController extends Controller
             'first_name' => 'required',
             'last_name' => 'required',
             'email' => 'required|email',
-            'password' => 'required|same:confirm-password',
             'roles' => 'required'
         ],
             [

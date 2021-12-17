@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Position;
 use Illuminate\Http\Request;
 
+/**
+ * Class PositionController
+ * @package App\Http\Controllers
+ * @author [Kravchenko Dmitriy => RedHead-DEV]
+ */
 class PositionController extends Controller
 {
     /**
@@ -60,7 +65,7 @@ class PositionController extends Controller
         Position::create($request->all());
 
         return redirect()->route('position.index')
-            ->with('Должность успешно создана');
+            ->with('success', 'Должность успешно создана');
     }
 
     /**
@@ -105,7 +110,7 @@ class PositionController extends Controller
         $position->update($request->all());
 
         return redirect()->route('position.index')
-            ->with('Должность успешно обновлена');
+            ->with('success', 'Должность успешно обновлена');
     }
 
     /**
@@ -119,6 +124,6 @@ class PositionController extends Controller
         $position->delete();
 
         return redirect()->route('position.index')
-            ->with('Должность успешно удалена');
+            ->with('success','Должность успешно удалена');
     }
 }

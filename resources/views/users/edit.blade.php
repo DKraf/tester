@@ -30,7 +30,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Имя:</strong>
-                {!! Form::text('first_name', null, array('placeholder' => "$user->first_name" ,'class' => 'form-control')) !!}
+                {!! Form::text('first_name', null, array('value' => "$user->first_name" ,'class' => 'form-control')) !!}
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
@@ -42,25 +42,13 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Отчество:</strong>
-                {!! Form::text('patronymic', null, array('placeholder' => "$user->patronymic",'class' => 'form-control')) !!}
+                {!! Form::text('patronymic', null, array('value' => "$user->patronymic",'class' => 'form-control')) !!}
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Email:</strong>
-                {!! Form::text('email', null, array('placeholder' => "$user->email",'class' => 'form-control')) !!}
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Пароль:</strong>
-                {!! Form::password('password', array('placeholder' => "$user->password",'class' => 'form-control')) !!}
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Повторите пароль:</strong>
-                {!! Form::password('confirm-password', array('placeholder' => 'Повторите пароль','class' => 'form-control')) !!}
+                {!! Form::text('email', null, array('value' => "$user->email",'class' => 'form-control')) !!}
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
@@ -78,7 +66,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Роль:</strong>
-                {!! Form::select('roles[]', $roles,[], array('class' => 'form-control')) !!}
+                {!! Form::select('roles', $roles, null, array('class' => 'form-control')) !!}
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">

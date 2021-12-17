@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\TestType;
 
+/**
+ * Class TestTypeController
+ * @package App\Http\Controllers
+ * @author [Kravchenko Dmitriy => RedHead-DEV]
+ */
 class TestTypeController extends Controller
 
 {
@@ -53,20 +58,21 @@ class TestTypeController extends Controller
         request()->validate([
             'name' => 'required',
             'questions_count' => 'required|min:1',
-            'min_question_count' => 'required',
+            'min_procent' => 'required',
             'time_for_testing' => 'required'
         ],
             [
                 'name.required' => 'Наименование должно быть заполнено',
                 'questions_count.required' => 'Колличество вопросов должно быть указанно',
-                'min_question_count.required' => 'Минимальное колличество правильных ответов должно быть указанно',
+                'min_procent.required' => 'Минимальное процент правильных ответов должен быть указан',
                 'time_for_testing.required' => 'Время прохождения тестов должно быть заполнено',
                 'questions_count.min' => 'Количество вопросов в тесте должно быть не менее 1',
                 'min_question_count.min' => 'Минимальное колличество правильных ответов в тесте должно быть не менее 1'
             ]
         );
-
-        TestType::create($request->all());
+        $input = $request->all();
+        $input['min_question_count'] = ($input['questions_count'] / 100 ) * $input['min_procent'];
+        TestType::create($input);
 
         return redirect()->route('test-type.index')
             ->with('Тип тестов успешно добавлен.');
@@ -80,6 +86,8 @@ class TestTypeController extends Controller
      */
     public function show(TestType $test_type)
     {
+        $test_type['min_procent'] = ($test_type['questions_count'] / $test_type['min_question_count']) * 100;
+
         return view('testtype.show',compact('test_type'));
     }
 
@@ -92,6 +100,7 @@ class TestTypeController extends Controller
      */
     public function edit(TestType $test_type)
     {
+        $test_type['min_procent'] = ($test_type['min_question_count'] / $test_type['questions_count'])  * 100 ;
         return view('testtype.edit',compact('test_type'));
     }
 
@@ -108,20 +117,22 @@ class TestTypeController extends Controller
         request()->validate([
             'name' => 'required',
             'questions_count' => 'required|min:1',
-            'min_question_count' => 'required',
+            'min_procent' => 'required',
             'time_for_testing' => 'required'
         ],
             [
                 'name.required' => 'Наименование должно быть заполнено',
                 'questions_count.required' => 'Колличество вопросов должно быть указанно',
-                'min_question_count.required' => 'Минимальное колличество правильных ответов должно быть указанно',
+                'min_procent.required' => 'Минимальное процент правильных ответов должен быть указан',
                 'time_for_testing.required' => 'Время прохождения тестов должно быть заполнено',
                 'questions_count.min' => 'Количество вопросов в тесте должно быть не менее 1',
                 'min_question_count.min' => 'Минимальное колличество правильных ответов в тесте должно быть не менее 1'
             ]
         );
+        $save_data = $request->all();
+        $save_data['min_question_count'] =  ($save_data['questions_count'] / 100 ) * $save_data['min_procent'];
 
-        $test_type->update($request->all());
+        $test_type->update($save_data);
 
         return redirect()->route('test-type.index')
             ->with('Тип теста успешно обновлен');

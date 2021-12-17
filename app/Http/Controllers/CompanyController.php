@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Company;
 use Illuminate\Http\Request;
 
+/**
+ * Class CompanyController
+ * @package App\Http\Controllers
+ * @author [Kravchenko Dmitriy => RedHead-DEV]
+ */
 class CompanyController extends Controller
 
 {
@@ -69,7 +74,7 @@ class CompanyController extends Controller
         Company::create($request->all());
 
         return redirect()->route('company.index')
-            ->with('Компания успешно добавлена.');
+            ->with('success','Компания успешно добавлена.');
     }
 
     /**
@@ -112,7 +117,7 @@ class CompanyController extends Controller
         $company->update($request->all());
 
         return redirect()->route('company.index')
-            ->with('Компания успешно обновлена');
+            ->with('success', 'Компания успешно обновлена');
     }
 
     /**
@@ -126,6 +131,6 @@ class CompanyController extends Controller
         $company->delete();
 
         return redirect()->route('company.index')
-            ->with('Компания успешно удалена');
+            ->with('success', 'Компания успешно удалена');
     }
 }

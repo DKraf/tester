@@ -21,7 +21,7 @@
             <p>{{ $message }}</p>
         </div>
     @endif
-
+    <div class="table-responsive">
     <table class="table table-bordered table-striped">
         <tr>
             <th>№</th>
@@ -50,7 +50,7 @@
             </tr>
         @endforeach
     </table>
-
+    </div>
     {!! $roles->render() !!}
 
     <p class="text-center text-primary"><small>	&#169 2021.  ТОО "Инженер-2015"</small></p>

@@ -22,15 +22,16 @@
         </div>
     @endif
     @if (sizeof($data) > 0)
-       <table class="table table-bordered table-striped">
-           <tr>
-               <th>№</th>
-               <th>Наименование</th>
-               <th>БИН</th>
-               <th>Тел:</th>
-               <th width="280px">Действия</th>
-           </tr>
-           @foreach ($data as $company)
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <tr>
+                <th>№</th>
+                <th>Наименование</th>
+                <th>БИН</th>
+                <th>Тел:</th>
+                <th width="280px">Действия</th>
+            </tr>
+            @foreach ($data as $company)
                <tr>
                    <td>{{ ++$i }}</td>
                    <td>{{ $company->name }}</td>
@@ -46,7 +47,6 @@
                                    <i class="bi bi-pencil"></i>
                                </a>
                            @endcan
-
                            @csrf
                            @method('DELETE')
                            @can('company-delete')
@@ -58,11 +58,11 @@
                    </td>
                </tr>
            @endforeach
-       </table>
+           </table>
+        </div>
     @else
         <p class="text-center text-danger">Пока нет ни одной компании!</p>
     @endif
        {!! $data->links() !!}
-
        <p class="text-center text"><small>	&#169 2021.  ТОО "Инженер-2015"</small></p>
    @endsection

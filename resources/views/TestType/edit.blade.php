@@ -43,8 +43,8 @@
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>Минимальное колличество правильных ответов:</strong>
-                    <input type="text" name="min_question_count" value="{{ $test_type->min_question_count }}" class="form-control" placeholder="5">
+                    <strong>Процент правильных ответов:</strong>
+                    <input type="text" name="min_procent" value="{{ $test_type->min_procent }} " class="form-control" placeholder="5">
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">

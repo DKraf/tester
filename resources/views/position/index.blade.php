@@ -22,7 +22,8 @@
         </div>
     @endif
     @if (sizeof($data) > 0)
-       <table class="table table-bordered table-striped">
+        <div class="table-responsive">
+        <table class="table table-bordered table-striped">
            <tr>
                <th>№</th>
                <th>Должность</th>
@@ -57,6 +58,7 @@
                </tr>
            @endforeach
        </table>
+        </div>
     @else
         <p class="text-center text-danger">Пока нет ни одной должности!</p>
     @endif

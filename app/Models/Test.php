@@ -10,6 +10,11 @@ class Test extends Model
     use HasFactory;
 
     /**
+     * @var string
+     */
+    protected $table = "test";
+
+    /**
      * Атрибуты, которые можно назначать массово.
      *
      * @var array
@@ -18,8 +23,8 @@ class Test extends Model
         'test_theme_id',
         'question',
         'answer_true',
-        'answer_1',
-        'answer_2',
-        'answer_3'
+        'A',
+        'B',
+        'C'
     ];
 }

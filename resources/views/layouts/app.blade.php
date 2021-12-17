@@ -33,8 +33,9 @@
                 <a class="list-group-item list-group-item-action list-group-item-light p-3 " href="/position"><i class="bi bi-mortarboard"></i> Должности</a>
                 <a class="list-group-item list-group-item-action list-group-item-light p-3 " href="/company"><i class="bi bi-building"></i> Компании</a>
                 <a class="list-group-item list-group-item-action list-group-item-light p-3 " href="/test-type"><i class="bi bi-clipboard-data"></i> Виды тестов</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3 " href="/users"><i class="bi bi-patch-question"></i> Тематики</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3 " href="/roles"><i class="bi bi-card-checklist"></i> Тесты</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3 " href="/test-theme"><i class="bi bi-patch-question"></i> Тематики</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3 " href="/tests-purpose"><i class="bi bi-journal-plus"></i> Назначенные Тесты</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3 " href="/testhistory"><i class="bi bi-calendar-event"></i> История Тестирования</a>
             </div>
         </div>
 

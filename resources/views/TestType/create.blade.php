@@ -4,10 +4,10 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Добавить тип теста:</h2>
+                <h2>Добавить тематику теста:</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('test-type.index') }}">
+                <a class="btn btn-primary" href="{{ route('test-theme.index') }}">
                     <i class="bi bi-arrow-return-left"></i>
                 </a>
             </div>
@@ -43,8 +43,8 @@
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>Минимальное колличество правильных ответов:</strong>
-                    <input type="text" name="min_question_count" class="form-control" placeholder="10">
+                    <strong>Процент правильных ответов:</strong>
+                    <input type="text" name="min_procent" class="form-control" placeholder="10">
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">

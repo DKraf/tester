@@ -10,12 +10,16 @@ class TestTheme extends Model
     use HasFactory;
 
     /**
+     * @var string
+     */
+    protected $table = "test_theme";
+
+    /**
      * Атрибуты, которые можно назначать массово.
      *
      * @var array
      */
     protected $fillable = [
-        'name',
-        'test_type_id'
+        'name'
     ];
 }

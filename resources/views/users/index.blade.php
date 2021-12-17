@@ -19,7 +19,7 @@
             <p>{{ $message }}</p>
         </div>
     @endif
-
+<div class="table-responsive">
     <table class="table  table-bordered table-striped">
         <tr>
             <th>№</th>
@@ -39,8 +39,7 @@
                 <td>{{ $user->patronymic }}</td>
                 <td>{{ $user->email }}</td>
                 <td>{{ $user->company_name }}</td>
-                <td>{{ $user->company  }}</td>
-
+                <td>{{ $user->position_name  }}</td>
                 <td>
                     <a class="btn btn-info btn-sm" href="{{ route('users.show',$user->id) }}">
                         <i class="bi bi-binoculars"></i>
@@ -55,7 +54,7 @@
             </tr>
         @endforeach
     </table>
-
+</div>
     {!! $data->render() !!}
 
     <p class="text-center text-primary"><small>	&#169 2021.  ТОО "Инженер-2015"</small></p>
