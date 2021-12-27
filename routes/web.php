@@ -8,6 +8,8 @@ use App\Http\Controllers\TestTypeController;
 use App\Http\Controllers\TestThemeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TestController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -32,13 +34,33 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::group(['middleware' => ['auth']], function () {
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
-    Route::resource('test', AssigenTestController::class);
+    Route::resource('test', TestController::class);
     Route::resource('company', CompanyController::class);
     Route::resource('position', PositionController::class);
     Route::resource('test-theme', TestThemeController::class);
     Route::resource('test-type', TestTypeController::class);
-    Route::get('/test-add/{id}', [AssigenTestController::class, 'createCustom'])->name('createCustom');
+    Route::resource('test-assign', AssigenTestController::class);
+    Route::resource('test-assign', AssigenTestController::class);
 
+    Route::get('/test-add/{id}', [TestController::class, 'createCustom'])->name('createCustom');
+
+    Route::prefix('admin')->group(function () {
+        Route::get('/testhistory/{id}', [AssigenTestController::class, 'testsHistoryShow'])->name('testhistoryshow');
+        Route::get('/testhistory', [AssigenTestController::class, 'testsHistory'])->name('testhistory');
+        Route::get('/reset-password/{id}', [UserController::class, 'resetPassword'])->name('resetpassword');
+
+    });
+
+    Route::prefix('user')->group(function () {
+        Route::get('/profile-edit', [AssigenTestController::class, 'testsHistoryShow'])->name('testhistoryshow');
+        Route::get('/test-assign', [AssigenTestController::class, 'testsHistory'])->name('testhistory');
+        Route::get('/tests-history', [AssigenTestController::class, 'testsHistory'])->name('testhistory');
+
+    });
+
+
+    //Searches
+    Route::get('/users-search/', [UserController::class, 'search'])->name('usersearch');
 
 });
 

@@ -24,18 +24,26 @@
     <div class="d-flex" id="wrapper">
         <!-- Sidebar-->
         <div class="border-end bg-white" id="sidebar-wrapper">
-            <div class="form-row center sidebar-heading border-bottom bg-light">
+            <div class="form-row center sidebar-heading border-bottom bg-light mr-4 pl-4 ">
                 <img src={{asset('images/logo.png')}} width="75" height="75">
             </div>
             <div class="list-group list-group-flush">
-                <a class="list-group-item list-group-item-action list-group-item-light p-3 " href="/users"><i class="bi bi-people"></i> Пользователи</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3 " href="/roles"><i class="bi bi-person-check"></i> Роли</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3 " href="/position"><i class="bi bi-mortarboard"></i> Должности</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3 " href="/company"><i class="bi bi-building"></i> Компании</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3 " href="/test-type"><i class="bi bi-clipboard-data"></i> Виды тестов</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3 " href="/test-theme"><i class="bi bi-patch-question"></i> Тематики</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3 " href="/tests-purpose"><i class="bi bi-journal-plus"></i> Назначенные Тесты</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3 " href="/testhistory"><i class="bi bi-calendar-event"></i> История Тестирования</a>
+                @role('Admin')
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 " href="/users"><i class="bi bi-people"></i> Пользователи</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 " href="/roles"><i class="bi bi-person-check"></i> Роли</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 " href="/position"><i class="bi bi-mortarboard"></i> Должности</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 " href="/company"><i class="bi bi-building"></i> Компании</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 " href="/test-type"><i class="bi bi-clipboard-data"></i> Виды тестов</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 " href="/test-theme"><i class="bi bi-patch-question"></i> Тематики</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 " href="/test-assign"><i class="bi bi-journal-plus"></i> Назначенные Тесты</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 " href="/admin/testhistory"><i class="bi bi-calendar-event"></i> История Тестирования</a>
+                @endrole
+                @role('User')
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 " href="/user/profile-edit"><i class="bi bi-person-circle"></i> Настройка профиля</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 " href="/user/test-assign"><i class="bi bi-file-earmark-check"></i> Мои тесты</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 " href="/user/tests-history"><i class="bi bi-file-earmark-bar-graph"></i> История тестирования</a>
+
+                @endrole
             </div>
         </div>
 

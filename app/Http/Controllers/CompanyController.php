@@ -33,7 +33,7 @@ class CompanyController extends Controller
     public function index()
     {
         $data = Company::latest()->paginate(3);
-        return view('company.index',compact('data'))
+        return view('admin.company.index',compact('data'))
             ->with('i', (request()->input('page', 1) - 1) * 30);
     }
 
@@ -44,7 +44,7 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        return view('company.create');
+        return view('admin.company.create');
     }
 
     /**
@@ -97,7 +97,7 @@ class CompanyController extends Controller
      */
     public function edit(Company $company)
     {
-        return view('company.edit',compact('company'));
+        return view('admin.company.edit',compact('company'));
     }
 
 

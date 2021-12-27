@@ -34,7 +34,7 @@ class PositionController extends Controller
     public function index()
     {
         $data = Position::latest()->paginate(5);
-        return view('Position.index',compact('data'))
+        return view('admin.Position.index',compact('data'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
@@ -46,7 +46,7 @@ class PositionController extends Controller
      */
     public function create()
     {
-        return view('position.create');
+        return view('admin.position.create');
     }
 
 
@@ -76,7 +76,7 @@ class PositionController extends Controller
      */
     public function show(Position $position)
     {
-        return view('position.show',compact('position'));
+        return view('admin.position.show',compact('position'));
     }
 
 
@@ -90,7 +90,7 @@ class PositionController extends Controller
     public function edit(Position $position)
     {
 
-        return view('position.edit',compact('position'));
+        return view('admin.position.edit',compact('position'));
     }
 
 

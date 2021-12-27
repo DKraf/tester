@@ -25,9 +25,9 @@ class UserController extends Controller
             ->leftJoin('position', 'users.position_id', '=', 'position.id')
             ->leftJoin('company', 'users.company_id', '=', 'company.id')
             ->select('users.*', 'position.name as position_name', 'company.name as company_name')
-            ->paginate(1);
-        return view('users.index',compact('data'))
-            ->with('i', ($request->input('page', 1) - 1) * 1);
+            ->paginate(30);
+        return view('admin.users.index',compact('data'))
+            ->with('i', ($request->input('page', 1) - 1) * 30);
     }
 
     /**
@@ -41,7 +41,7 @@ class UserController extends Controller
         $position = Position::pluck('name','id')->toArray();;
         $company = Company::pluck('name','id')->all();
         $pass = uniqid();
-        return view('users.create',compact('roles','position','company','pass'));
+        return view('admin.users.create',compact('roles','position','company','pass'));
     }
 
     /**
@@ -58,7 +58,8 @@ class UserController extends Controller
             'company_id' => 'required',
             'position_id' => 'required',
             'login' => 'required|unique:users,login',
-            'password' => 'required|same:confirm-password',
+//            'email' => 'unique:email',
+//            'password' => 'required|same:confirm-password',
             'roles' => 'required'
         ],
         [
@@ -67,7 +68,7 @@ class UserController extends Controller
             'company_id.required' => 'Компания не выбранна',
             'position_id.required' => 'Должность не выбранна',
             'login.required' => 'login не заполнен',
-            'email.email' => 'email не соответсвует формату',
+            'email.unique' => 'email существует',
             'login.unique' => 'Указанный login уже существует',
             'password.required' => 'Пароль не заполнен',
             'password.same' => 'Пароли не совпадают',
@@ -77,13 +78,18 @@ class UserController extends Controller
         );
 
         $input = $request->all();
+        $flag =  User::where('login', '=',$input['login'] or 'email' , '=' , $input['email'])->first()->toArray();
+        if (sizeof($flag)) {
+            return redirect()->route('users.index')
+                ->with('warning','Ошибка создания пользователя, пользователь с таким email или Login существует');
+        }
         $input['password'] = Hash::make($input['password']);
 
         $user = User::create($input);
         $user->assignRole($request->input('roles'));
 
         return redirect()->route('users.index')
-            ->with('success','User created successfully');
+            ->with('success','Пользователь успешно создан');
     }
 
     /**
@@ -95,7 +101,7 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::find($id);
-        return view('users.show',compact('user'));
+        return view('admin.users.show',compact('user'));
     }
 
     /**
@@ -115,7 +121,7 @@ class UserController extends Controller
 
         $userRole = $user->roles->pluck('name','name')->all();
 
-        return view('users.edit',compact('user','roles','userRole','position','company'));
+        return view('admin.users.edit',compact('user','roles','userRole','position','company'));
     }
 
     /**
@@ -175,5 +181,19 @@ class UserController extends Controller
         User::find($id)->delete();
         return redirect()->route('users.index')
             ->with('success','User deleted successfully');
+    }
+
+    public function search(Request $request)
+    {
+        $search = $request->input('search');
+        $data = User::orderBy('users.id','DESC')
+            ->where('users.first_name', 'LIKE', "%$search%")
+            ->orWhere('users.last_name', 'LIKE', "%$search%" )
+            ->leftJoin('position', 'users.position_id', '=', 'position.id')
+            ->leftJoin('company', 'users.company_id', '=', 'company.id')
+            ->select('users.*', 'position.name as position_name', 'company.name as company_name')
+            ->paginate(30);
+        return view('admin.users.index',compact('data'))
+            ->with('i', ($request->input('page', 1) - 1) * 30);
     }
 }

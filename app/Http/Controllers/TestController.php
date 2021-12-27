@@ -35,7 +35,7 @@ class TestController extends Controller
 
     public function createCustom($id)
     {
-        return view('test.create',compact('id'));
+        return view('admin.test.create',compact('id'));
     }
 
     /**
@@ -83,7 +83,7 @@ class TestController extends Controller
     {
         $test = Test::find($id);
 
-        return view('test.show',compact('test'));
+        return view('admin.test.show',compact('test'));
     }
 
     /**
@@ -98,7 +98,7 @@ class TestController extends Controller
     {
         $test = Test::find($id);
 
-        return view('test.edit',compact('test'));
+        return view('admin.test.edit',compact('test'));
     }
 
     /**
