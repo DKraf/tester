@@ -24,6 +24,7 @@ class AssigenTest extends Migration
             $table->integer('true_answer_count')->nullable();
             $table->integer('time_spent')->nullable();
             $table->timestamps();
+            $table->boolean('is_started')->default(0);
         });
     }
 

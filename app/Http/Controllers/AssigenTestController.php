@@ -44,8 +44,6 @@ class AssigenTestController extends Controller
      */
     public function index(Request $request)
     {
-
-
         $data = AssigenTest::orderBy('assigen_test.id','DESC')
             ->leftJoin('test_theme', 'assigen_test.test_theme_id', '=', 'test_theme.id')
             ->leftJoin('test_type', 'assigen_test.test_type_id', '=', 'test_type.id')
@@ -317,5 +315,88 @@ class AssigenTestController extends Controller
 
         $data = $status_service->checkDateForStatus($data);
         return view('admin.testsHistory.show',compact('data', 'tests'));
+    }
+
+    //USER
+    public function userTestAssign(Request $request)
+    {
+        $userId = Auth::id();
+
+        $data = AssigenTest::orderBy('assigen_test.id','DESC')
+            ->where('user_id' , '=' , $userId)
+            ->leftJoin('test_theme', 'assigen_test.test_theme_id', '=', 'test_theme.id')
+            ->leftJoin('test_type', 'assigen_test.test_type_id', '=', 'test_type.id')
+            ->leftJoin('users', 'assigen_test.user_id', '=', 'users.id')
+            ->select
+            (
+                'assigen_test.*',
+                'test_theme.name as theme',
+                'test_type.name as type',
+                'test_type.time_for_testing as time_for_testing',
+                'test_type.questions_count as questions_count',
+                'users.first_name as first_name',
+                'users.last_name as last_name',
+                'users.patronymic as patronymic'
+            )
+            ->where('date_done', '=', null)
+            ->paginate(30);
+
+        $data = $this->status_service->checkDateForStatus($data);
+
+        return view('user.assigentest.index',compact('data'))
+            ->with('i', ($request->input('page', 1) - 1) * 30);
+    }
+
+    public function takeTest($id)
+    {
+        $data = AssigenTest::where('assigen_test.id' , '=' , $id)
+            ->leftJoin('test_theme', 'assigen_test.test_theme_id', '=', 'test_theme.id')
+            ->leftJoin('test_type', 'assigen_test.test_type_id', '=', 'test_type.id')
+            ->select
+            (
+                'assigen_test.*',
+                'test_theme.name as theme',
+                'test_type.time_for_testing as time_for_testing'
+            )
+            ->get()
+        ;
+        $tests = AssigenTestQuestion::where('assigen_test_question.assigen_test_id' , '=' , $id )
+            ->leftJoin('test', 'test.id', '=', 'assigen_test_question.question_id')
+            ->select
+            (
+                'test.*'
+            )
+            ->get();
+
+        if (!$this->status_service->checkTestAccess($data)) {
+            return redirect()->back()
+                ->with('warning', 'Выбраный вами  тест не доступен либо просрочен!');
+        }
+
+        if ($this->status_service->checkWasStart($data)){
+            return redirect()->back()
+                ->with('warning', 'Выбранный тест был начат ранее, но не был закончен, для переназначения теста обратитесь к Администратору сайта');
+        }
+
+        $test = AssigenTest::find($id);
+        $test->update(['is_started'=>true]);
+
+        return view('user.assigentest.take',compact('data', 'tests'))
+            ->with('i');
+    }
+
+
+    public function saveResult(Request $request, $id)
+    {
+        $input = $request->all();
+        $test_time = $input['time_for_testing'];
+        unset($input['time_for_testing']);
+        unset($input['_token']);
+
+        $this->status_service->saveAnswerToAssignTestQuestions($id,$input);
+        $this->status_service->calculateTrueAnswers($id, $test_time);
+
+        return redirect()->route('user.testassign')
+            ->with('success', 'Тест завершен! Результаты тестирования находятся в вкладе "История тестирвоания"');
     }
 }

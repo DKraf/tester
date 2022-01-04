@@ -24,6 +24,10 @@ class AssigenTest extends Model
         'test_type_id',
         'user_id',
         'date_start',
-        'date_end'
+        'date_end',
+        'is_started',
+        'true_answer_count',
+        'time_spent',
+        'date_done',
     ];
 }

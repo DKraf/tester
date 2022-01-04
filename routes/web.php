@@ -52,9 +52,11 @@ Route::group(['middleware' => ['auth']], function () {
     });
 
     Route::prefix('user')->group(function () {
-        Route::get('/profile-edit', [AssigenTestController::class, 'testsHistoryShow'])->name('testhistoryshow');
-        Route::get('/test-assign', [AssigenTestController::class, 'testsHistory'])->name('testhistory');
-        Route::get('/tests-history', [AssigenTestController::class, 'testsHistory'])->name('testhistory');
+        Route::get('/profile-edit', [AssigenTestController::class, 'testsHistoryShow'])->name('profileedit');
+        Route::get('/test-assign', [AssigenTestController::class, 'userTestAssign'])->name('user.testassign');
+        Route::get('/tests-history', [AssigenTestController::class, 'testsHistory'])->name('user.testhistory');
+        Route::get('/take-test/{id}', [AssigenTestController::class, 'takeTest'])->name('user.test.take');
+        Route::post('/test-result/{id}', [AssigenTestController::class, 'saveResult'])->name('user.test.result');
 
     });
 
