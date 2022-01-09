@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Company;
 use App\Models\Position;
+use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
 use DB;
 use Hash;
@@ -101,7 +102,9 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::find($id);
-        return view('admin.users.show',compact('user'));
+        $position = Position::find($user->position_id);
+        $company = Company::find($user->company_id);
+        return view('admin.users.show',compact('user', 'position', 'company'));
     }
 
     /**
@@ -195,5 +198,93 @@ class UserController extends Controller
             ->paginate(30);
         return view('admin.users.index',compact('data'))
             ->with('i', ($request->input('page', 1) - 1) * 30);
+    }
+
+
+    public function userEdit()
+    {
+        $userId = Auth::id();
+
+        $user = User::find($userId);
+        $position = Position::pluck('name','id')->all();
+        $company = Company::pluck('name','id')->all();
+
+
+        return view('user.users.edit',compact('user','position','company'));
+    }
+
+
+    public function userChange(Request $request, $id)
+    {
+        $this->validate($request, [
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'company_id' => 'required',
+            'position_id' => 'required',
+        ],
+            [
+                'first_name.required' => 'Имя должно быть заполнено',
+                'last_name.required' => 'Фамилия должна быть заполненна',
+                'company_id.required' => 'Компания не выбранна',
+                'position_id.required' => 'Должность не выбранна',
+                'email.required' => 'email не заполнен',
+                'email.email' => 'email не соответсвует формату',
+                'email.unique' => 'Указанный Email уже существует',
+            ]);
+
+        $input = $request->all();
+
+        $user = User::find($id);
+        $user->update($input);
+
+        return redirect()->route('user.edit')
+            ->with('success','Пользователь успешно обнавлен!');
+    }
+
+    public function changePassword()
+    {
+        return view('user.users.editpassword');
+    }
+    public function editUserPassword(Request $request)
+    {
+        $this->validate($request, [
+
+            'password' => 'required|same:confirm-password|min:6',
+            'old-password' => 'required|password'
+        ],
+            [
+                'password.required' => 'Пароль не заполнен',
+                'old-password.password' => 'Текущий пароль указан не верно',
+                'password.min' => 'Пароль должен быть не менее 6 символов',
+                'password.same' => 'Пароли не совпадают',
+                'old-password.required' => 'Старый пароль не указан',
+
+            ]
+        );
+        $userId = Auth::id();
+
+        $input = $request->all();
+
+        $input['password'] = Hash::make($input['password']);
+
+        $user = User::find($userId);
+
+        $user->update([
+            'password'=> $input['password']
+        ]);
+
+        return redirect()->route('user.edit')
+            ->with('success','Пароль успешно изменен!');
+    }
+
+    public function resetPassword($id)
+    {
+        $user = User::find($id);
+        $user->update([
+            'password'=> Hash::make('1q2w3e4r5t')
+        ]);
+
+        return redirect()->route('users.show', $id)
+            ->with('success','Пароль успешно сброшен на стандартный');
     }
 }

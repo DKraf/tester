@@ -29,7 +29,8 @@
             </div>
             <div class="list-group list-group-flush">
                 @role('Admin')
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3 " href="/users"><i class="bi bi-people"></i> Пользователи</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3 " href="/user/edit"><i class="bi bi-person-circle"></i> Настройка профиля</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3 " href="/users"><i class="bi bi-people"></i> Пользователи</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3 " href="/roles"><i class="bi bi-person-check"></i> Роли</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3 " href="/position"><i class="bi bi-mortarboard"></i> Должности</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3 " href="/company"><i class="bi bi-building"></i> Компании</a>
@@ -39,7 +40,7 @@
                     <a class="list-group-item list-group-item-action list-group-item-light p-3 " href="/admin/testhistory"><i class="bi bi-calendar-event"></i> История Тестирования</a>
                 @endrole
                 @role('User')
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3 " href="/user/profile-edit"><i class="bi bi-person-circle"></i> Настройка профиля</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 " href="/user/edit"><i class="bi bi-person-circle"></i> Настройка профиля</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3 " href="/user/test-assign"><i class="bi bi-file-earmark-check"></i> Мои тесты</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3 " href="/user/tests-history"><i class="bi bi-file-earmark-bar-graph"></i> История тестирования</a>
 

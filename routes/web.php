@@ -54,9 +54,14 @@ Route::group(['middleware' => ['auth']], function () {
     Route::prefix('user')->group(function () {
         Route::get('/profile-edit', [AssigenTestController::class, 'testsHistoryShow'])->name('profileedit');
         Route::get('/test-assign', [AssigenTestController::class, 'userTestAssign'])->name('user.testassign');
-        Route::get('/tests-history', [AssigenTestController::class, 'testsHistory'])->name('user.testhistory');
+        Route::get('/tests-history', [AssigenTestController::class, 'userTestsHistory'])->name('user.testhistory');
+        Route::get('/tests-history/{id}', [AssigenTestController::class, 'userTestsHistoryShow'])->name('user.testhistoryshow');
         Route::get('/take-test/{id}', [AssigenTestController::class, 'takeTest'])->name('user.test.take');
         Route::post('/test-result/{id}', [AssigenTestController::class, 'saveResult'])->name('user.test.result');
+        Route::get('/edit', [UserController::class, 'userEdit'])->name('user.edit');
+        Route::post('/edit/{id}', [UserController::class, 'userChange'])->name('user.change');
+        Route::get('/change-password', [UserController::class, 'changePassword'])->name('user.changepass');
+        Route::post('/edit-password', [UserController::class, 'editUserPassword'])->name('user.editpass');
 
     });
 

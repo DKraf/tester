@@ -8,7 +8,7 @@
                 <h2> Информация о пройденом тесте:</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('testhistory') }}">
+                <a class="btn btn-primary" href="{{ route('user.testhistory') }}">
                     <i class="bi bi-arrow-return-left"></i>
                 </a>
             </div>
@@ -104,17 +104,15 @@
                     <th>Вариант А</th>
                     <th>Вариант B</th>
                     <th>Вариант C</th>
-                    <th>Правильный ответ</th>
                     <th>Выбранный ответ</th>
                 </tr>
                 @foreach ($tests as $test)
                     <tr>
-                        <td>{{ $test->question_id }} </td>
+                        <td>{{ ++$i }}</td>
                         <td>{{ $test->question_name }} </td>
                         <td>{{ $test->A }} </td>
                         <td>{{ $test->B }} </td>
                         <td>{{ $test->C }} </td>
-                        <td>{{ $test->answer_true }} </td>
                         <td style="
                         @if($test->answer_true == $test->selected_answer) background-color:#aef5ae
                         @else background-color:#ffb4b4
