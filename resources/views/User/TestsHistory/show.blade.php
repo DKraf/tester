@@ -82,7 +82,7 @@
                     @if(!empty($test_assign->true_answer_count) &&  ((int)$test_assign->true_answer_count >= (int)$test_assign->min_question_count))
                         Пройден!
                     @else
-                        Не пройден, не набранно нужное колличество правильных ответов!!!
+                        Не пройден, не набранно нужное колличество правильных ответов!
                     @endif
                 </div>
             </div>
