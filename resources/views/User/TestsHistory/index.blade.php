@@ -37,6 +37,9 @@
                        <a class="btn btn-info" href="{{ route('user.testhistoryshow',$test_assign->id) }}">
                            <i class="bi bi-binoculars"></i>
                        </a>
+                       <a class="btn btn-success" href="{{ route('downloadResult',$test_assign->id) }}">
+                           <i class="bi bi-download"></i>
+                       </a>
                    </td>
                </tr>
            @endforeach

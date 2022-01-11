@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\ExcelController;
 use App\Http\Controllers\PositionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\AssigenTestController;
@@ -42,8 +43,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('test-assign', AssigenTestController::class);
     Route::resource('test-assign', AssigenTestController::class);
 
-    Route::get('/test-add/{id}', [TestController::class, 'createCustom'])->name('createCustom');
-
     Route::prefix('admin')->group(function () {
         Route::get('/testhistory/{id}', [AssigenTestController::class, 'testsHistoryShow'])->name('testhistoryshow');
         Route::get('/testhistory', [AssigenTestController::class, 'testsHistory'])->name('testhistory');
@@ -65,7 +64,8 @@ Route::group(['middleware' => ['auth']], function () {
 
     });
 
-
+    Route::get('/test-add/{id}', [TestController::class, 'createCustom'])->name('createCustom');
+    Route::get('/download-result/{id}', [ExcelController::class, 'downloadResult'])->name('downloadResult');
     //Searches
     Route::get('/users-search/', [UserController::class, 'search'])->name('usersearch');
 
