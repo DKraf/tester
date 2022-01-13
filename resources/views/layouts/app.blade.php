@@ -24,7 +24,8 @@
     <div class="d-flex" id="wrapper">
         <!-- Sidebar-->
         <div class="border-end bg-white" id="sidebar-wrapper">
-            <div class="form-row center sidebar-heading border-bottom bg-light mr-4 pl-4 ">
+            <div class="form-row center sidebar-heading border-bottom bg-light mr-0 pl-4 ">
+
                 <img src={{asset('images/logo.png')}} width="75" height="75">
             </div>
             <div class="list-group list-group-flush">

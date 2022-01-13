@@ -18,13 +18,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Наименование:</strong>
-                {{ $test_type->theme }}
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Тип:</strong>
-                {{ $test_type->type_name }}
+                {{ $test_type->name }}
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
@@ -43,12 +37,6 @@
             <div class="form-group">
                 <strong>Время теста:</strong>
                 {{ $test_type->time_for_testing }}
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Статус:</strong>
-                {{ $test_type->status }}
             </div>
         </div>
     </div>

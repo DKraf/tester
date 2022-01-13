@@ -22,4 +22,16 @@ class TestTheme extends Model
     protected $fillable = [
         'name'
     ];
+
+
+    /**
+     * @param $search
+     * @return mixed
+     */
+    public function search($search)
+    {
+        return TestTheme::orderBy('id','DESC')
+            ->where('name', 'LIKE', "%$search%")
+            ->paginate(30);
+    }
 }

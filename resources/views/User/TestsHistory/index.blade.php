@@ -20,6 +20,7 @@
                <th>Отвечено правильно</th>
                <th>Дата прохождения</th>
                <th>Затраченное время</th>
+               <th>Результат</th>
                <th width="280px">Действия</th>
            </tr>
            @foreach ($data as $test_assign)
@@ -32,7 +33,11 @@
                    <td>{{ $test_assign->true_answer_count }} </td>
                    <td> {{ $test_assign->date_done }} </td>
                    <td>{{ $test_assign->time_spent }} мин. </td>
-
+                   <td> @if(!empty($test_assign->true_answer_count) &&  ((int)$test_assign->true_answer_count >= (int)$test_assign->min_question_count))
+                           Сдал
+                       @else
+                           Не сдал
+                       @endif</td>
                    <td>
                        <a class="btn btn-info" href="{{ route('user.testhistoryshow',$test_assign->id) }}">
                            <i class="bi bi-binoculars"></i>

@@ -25,6 +25,8 @@ class CompanyController extends Controller
         $this->middleware('permission:company-edit', ['only' => ['edit','update']]);
         $this->middleware('permission:company-delete', ['only' => ['destroy']]);
     }
+
+
     /**
      * Отобразить список ресурсов.
      *
@@ -37,6 +39,7 @@ class CompanyController extends Controller
             ->with('i', (request()->input('page', 1) - 1) * 30);
     }
 
+
     /**
      * Отобразить форму для создания нового ресурса.
      *
@@ -46,6 +49,7 @@ class CompanyController extends Controller
     {
         return view('admin.company.create');
     }
+
 
     /**
      * Поместить только что созданный ресурс в хранилище.
@@ -77,6 +81,7 @@ class CompanyController extends Controller
             ->with('success','Компания успешно добавлена.');
     }
 
+
     /**
      * Отобразить указанный ресурс.
      *
@@ -87,6 +92,7 @@ class CompanyController extends Controller
     {
         return view('admin.company.show',compact('company'));
     }
+
 
     /**
      * Отобразить форму для редактирования указанного
@@ -120,6 +126,7 @@ class CompanyController extends Controller
             ->with('success', 'Компания успешно обновлена');
     }
 
+
     /**
      * Удалить указанный ресурс из хранилища.
      *
@@ -132,5 +139,20 @@ class CompanyController extends Controller
 
         return redirect()->route('company.index')
             ->with('success', 'Компания успешно удалена');
+    }
+
+
+    /**
+     * Поиск
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function search(Request $request)
+    {
+        $search = $request->input('search');
+        $data = Company::search($search);
+
+        return view('admin.Company.index',compact('data'))
+            ->with('i', (request()->input('page', 1) - 1) * 30);
     }
 }

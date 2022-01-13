@@ -41,7 +41,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('test-theme', TestThemeController::class);
     Route::resource('test-type', TestTypeController::class);
     Route::resource('test-assign', AssigenTestController::class);
-    Route::resource('test-assign', AssigenTestController::class);
 
     Route::prefix('admin')->group(function () {
         Route::get('/testhistory/{id}', [AssigenTestController::class, 'testsHistoryShow'])->name('testhistoryshow');
@@ -65,9 +64,17 @@ Route::group(['middleware' => ['auth']], function () {
     });
 
     Route::get('/test-add/{id}', [TestController::class, 'createCustom'])->name('createCustom');
+
     Route::get('/download-result/{id}', [ExcelController::class, 'downloadResult'])->name('downloadResult');
+
     //Searches
     Route::get('/users-search/', [UserController::class, 'search'])->name('usersearch');
+    Route::get('/position-search/', [PositionController::class, 'search'])->name('positionsearch');
+    Route::get('/company-search/', [CompanyController::class, 'search'])->name('companysearch');
+    Route::get('/test-type-search/', [TestTypeController::class, 'search'])->name('testtypesearch');
+    Route::get('/test-theme-search/', [TestThemeController::class, 'search'])->name('testthemesearch');
+    Route::get('/test-assign-search/', [AssigenTestController::class, 'search'])->name('testassignsearch');
+    Route::get('/test-assign-history-search/', [AssigenTestController::class, 'searchhistory'])->name('testassignhistorysearch');
 
 });
 

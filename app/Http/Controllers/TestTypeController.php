@@ -25,6 +25,8 @@ class TestTypeController extends Controller
         $this->middleware('permission:testtype-edit', ['only' => ['edit','update']]);
         $this->middleware('permission:testtype-delete', ['only' => ['destroy']]);
     }
+
+
     /**
      * Отобразить список ресурсов.
      *
@@ -37,6 +39,7 @@ class TestTypeController extends Controller
             ->with('i', (request()->input('page', 1) - 1) * 30);
     }
 
+
     /**
      * Отобразить форму для создания нового ресурса.
      *
@@ -46,6 +49,7 @@ class TestTypeController extends Controller
     {
         return view('admin.testtype.create');
     }
+
 
     /**
      * Поместить только что созданный ресурс в хранилище.
@@ -78,6 +82,7 @@ class TestTypeController extends Controller
             ->with('Тип тестов успешно добавлен.');
     }
 
+
     /**
      * Отобразить указанный ресурс.
      *
@@ -90,6 +95,7 @@ class TestTypeController extends Controller
 
         return view('admin.testtype.show',compact('test_type'));
     }
+
 
     /**
      * Отобразить форму для редактирования указанного
@@ -138,6 +144,7 @@ class TestTypeController extends Controller
             ->with('Тип теста успешно обновлен');
     }
 
+
     /**
      * Удалить указанный ресурс из хранилища.
      *
@@ -150,5 +157,19 @@ class TestTypeController extends Controller
 
         return redirect()->route('test-type.index')
             ->with('Тип теста успешно удален');
+    }
+
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function search(Request $request)
+    {
+        $search = $request->input('search');
+        $data = TestType::search($search);
+
+        return view('admin.testtype.index',compact('data'))
+            ->with('i', (request()->input('page', 1) - 1) * 30);
     }
 }

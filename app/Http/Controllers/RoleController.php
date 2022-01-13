@@ -23,6 +23,7 @@ class RoleController extends Controller
         $this->middleware('permission:role-delete', ['only' => ['destroy']]);
     }
 
+
     /**
      * Отобразить список ресурсов.
      *
@@ -35,6 +36,7 @@ class RoleController extends Controller
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
+
     /**
      * Отобразить форму для создания нового ресурса.
      *
@@ -46,11 +48,13 @@ class RoleController extends Controller
         return view('admin.roles.create',compact('permission'));
     }
 
+
     /**
      * Поместить только что созданный ресурс в хранилище.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request)
     {
@@ -65,6 +69,8 @@ class RoleController extends Controller
         return redirect()->route('roles.index')
             ->with('success','Роль успешно добавлена');
     }
+
+
     /**
      * Отобразить указанный ресурс.
      *
@@ -80,6 +86,7 @@ class RoleController extends Controller
 
         return view('admin.roles.show',compact('role','rolePermissions'));
     }
+
 
     /**
      * Отобразить форму для редактирования указанного
@@ -122,6 +129,8 @@ class RoleController extends Controller
         return redirect()->route('roles.index')
             ->with('success','Роль успешно обновлена');
     }
+
+
     /**
      * Убрать указанный ресурс из хранилища.
      *

@@ -25,9 +25,9 @@ class AssigenTestController extends Controller
      */
     private $status_service;
 
+
     /**
      * Отобразить список ресурсов.
-     *
      * @return \Illuminate\Http\Response
      */
     function __construct()
@@ -38,9 +38,10 @@ class AssigenTestController extends Controller
         $this->middleware('permission:assigntest-delete', ['only' => ['destroy']]);
         $this->status_service = new TestService();
     }
+
+
     /**
      * Отобразить список ресурсов
-     *
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
@@ -67,9 +68,9 @@ class AssigenTestController extends Controller
             ->with('i', ($request->input('page', 1) - 1) * 30);
     }
 
+
     /**
      * Вывести форму для создания нового ресурса.
-     *
      * @return \Illuminate\Http\Response
      */
     public function create(Request $request)
@@ -88,7 +89,6 @@ class AssigenTestController extends Controller
 
     /**
      * Поместить только что созданный ресурс в хранилище.
-     *
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Validation\ValidationException
@@ -131,7 +131,6 @@ class AssigenTestController extends Controller
 
     /**
      * Отобразить указанный ресурс.
-     *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -175,11 +174,10 @@ class AssigenTestController extends Controller
         return view('admin.assigentest.show',compact('data', 'tests'));
     }
 
+
     /**
      * Отобразить форму для редактирования указанного
-
      * ресурса.
-     *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -199,11 +197,11 @@ class AssigenTestController extends Controller
     }
 
     /**
-     * Обновить указанный ресурс в хранилище.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * Обновить указанный ресурс в хранилище
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function update(Request $request, $id)
     {
@@ -248,6 +246,11 @@ class AssigenTestController extends Controller
             ->with('Тест удален Успешно');
     }
 
+    /**
+     * Все пройденные тесты
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function testsHistory(Request $request)
     {
         $data = AssigenTest::orderBy('assigen_test.date_done','DESC')
@@ -273,6 +276,11 @@ class AssigenTestController extends Controller
     }
 
 
+    /**
+     * Детали пройденного теста админу
+     * @param $id
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function testsHistoryShow($id)
     {
         $status_service = new TestService();
@@ -319,6 +327,12 @@ class AssigenTestController extends Controller
     }
 
     //USER
+
+    /**
+     * Все тесты назначенные пользователю
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function userTestAssign(Request $request)
     {
         $userId = Auth::id();
@@ -348,6 +362,12 @@ class AssigenTestController extends Controller
             ->with('i', ($request->input('page', 1) - 1) * 30);
     }
 
+
+    /**
+     * Получить назнаенный тест для прохождение пользователем
+     * @param $id
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\RedirectResponse
+     */
     public function takeTest($id)
     {
         $data = AssigenTest::where('assigen_test.id' , '=' , $id)
@@ -387,6 +407,12 @@ class AssigenTestController extends Controller
     }
 
 
+    /**
+     * сохранение результата тестирования
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function saveResult(Request $request, $id)
     {
         $input = $request->all();
@@ -401,6 +427,12 @@ class AssigenTestController extends Controller
             ->with('success', 'Тест завершен! Результаты тестирования находятся в вкладе "История тестирвоания"');
     }
 
+
+    /**
+     * История тестов Пользователя
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function userTestsHistory(Request $request)
     {
         $userId = Auth::id();
@@ -430,6 +462,11 @@ class AssigenTestController extends Controller
     }
 
 
+    /**
+     * Детали теста пройденного для пользователя
+     * @param $id
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function userTestsHistoryShow($id)
     {
         $assign_test = new AssigenTestService();
@@ -440,7 +477,35 @@ class AssigenTestController extends Controller
 
         return view('user.testsHistory.show',compact('data', 'tests'))
             ->with('i');
-        ;
     }
 
+
+    /**
+     * Поиск назначеных тестов
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function search(Request $request)
+    {
+        $search = $request->input('search');
+        $data = AssigenTest::search($search);
+
+        return view('admin.Assigentest.index',compact('data'))
+            ->with('i', ($request->input('page', 1) - 1) * 30);
+    }
+
+
+    /**
+     * Поиск истории
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function searchHistory(Request $request)
+    {
+        $search = $request->input('search');
+        $data = AssigenTest::searchHistory($search);
+
+        return view('admin.testsHistory.index',compact('data'))
+            ->with('i', ($request->input('page', 1) - 1) * 30);
+    }
 }

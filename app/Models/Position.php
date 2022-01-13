@@ -20,4 +20,15 @@ class Position extends Model
     protected $fillable = [
         'name'
     ];
+
+    /**
+     * @param $search
+     * @return mixed
+     */
+    public function search($search)
+    {
+        return Position::orderBy('id','DESC')
+            ->where('name', 'LIKE', "%$search%")
+            ->paginate(30);
+    }
 }

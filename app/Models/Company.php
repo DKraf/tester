@@ -27,4 +27,16 @@ class Company extends Model
         'legal_address',
         'tel_number'
     ];
+
+
+    /**
+     * @param $search
+     * @return mixed
+     */
+    public function search($search)
+    {
+        return Company::orderBy('id','DESC')
+            ->where('name', 'LIKE', "%$search%")
+            ->paginate(30);
+    }
 }

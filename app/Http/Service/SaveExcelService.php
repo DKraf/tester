@@ -4,6 +4,7 @@
 namespace App\Http\Service;
 
 
+use App\Http\Helper\Path;
 use App\Http\Repository\AdminAssignTestQuestion;
 use App\Http\Repository\AssignTest;
 use App\Models\AssigenTest;
@@ -33,9 +34,7 @@ class SaveExcelService
     protected function save($data, $id)
     {
         $i = 2;
-        $host =$_SERVER['DOCUMENT_ROOT'];
-        $directory = '/excelsaves/';
-        $filename= $host.$directory.$id.'.xlsx';
+
         $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
         $sheet->setCellValue('A1', 'Номер теста');
@@ -48,17 +47,19 @@ class SaveExcelService
         $sheet->setCellValue('A8', 'Мин. кол-во правильных ответов:');
         $sheet->setCellValue('A9', 'Всего отвечено правильно на:');
         $sheet->setCellValue('A10', 'Затраченное время на тестирование:');
-        $sheet->setCellValue('A11', 'Статус теста:');
+        $sheet->setCellValue('A11', 'Результат:');
         $sheet->setCellValue('A12', 'Дата сдачи теста:');
 
 
         $mydata = $data['data'];
         $questions = $data['tests'];
         foreach ($mydata as $item){
+            $file_data = Path::getExcelPath($item->last_name,$item->id );
+
             if (!empty($item->true_answer_count) &&  ((int)$item->true_answer_count >= (int)$item->min_question_count)) {
-                $status = 'Пройден';
+                $status = 'Сдал';
             } else {
-                $status = 'Не пройден, не набранно нужное колличество правильных ответов';
+                $status = 'Не сдал';
             }
             $sheet->setCellValue('B1', (string)$item->id);
             $sheet->setCellValue('B2', $item->last_name . ' '. $item->first_name . ' ' . $item->patronymic);
@@ -97,8 +98,10 @@ class SaveExcelService
             $i++;
             $number++;
         }
+
         $writer = new Xlsx($spreadsheet);
-        $writer->save($filename);
-        return $filename;
+        $writer->save($file_data['path']);
+
+        return ['path' => $file_data['path'] , 'filename' => $file_data['filename']];
     }
 }

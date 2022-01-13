@@ -6,12 +6,23 @@
             <div class="pull-left">
                 <h2>Назначенные тестирования:</h2>
             </div>
-            <div class="pull-right">
+            <div class="pull-right ml-3 mr-3">
                 @can('assigntest-create')
                     <a class="btn btn-success" href="{{ route('test-assign.create') }}">
                         <i class="bi bi-plus-square"></i>
                     </a>
                 @endcan
+            </div>
+            <div class="pull-right ml-3 mr-3">
+                <form action="{{ route('testassignsearch') }}"  method="get">
+                    <input name="search"  placeholder="Искать здесь..." type="search" autocomplete="off">
+                    <button type="submit" title="Искать...">
+                        <i class="bi bi-search"></i>
+                    </button>
+                    <a  title="Отменить параметры поиска" href="{{ route('test-assign.index') }}">
+                        <i class="bi bi-backspace"></i>
+                    </a>
+                </form>
             </div>
         </div>
     </div>
@@ -69,7 +80,7 @@
     @else
         <p class="text-center text-danger">Пока нет ни одного назначенного теста!</p>
     @endif
-       {!! $data->links() !!}
+       {!! $data->render() !!}
 
     <p class="text-center text-primary"><small>	&#169 2021.  ТОО "Инженер-2015"</small></p>
    @endsection

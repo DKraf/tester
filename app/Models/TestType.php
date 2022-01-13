@@ -25,4 +25,16 @@ class TestType extends Model
         'min_question_count',
         'time_for_testing'
     ];
+
+
+    /**
+     * @param $search
+     * @return mixed
+     */
+    public function search($search)
+    {
+        return TestType::orderBy('id','DESC')
+            ->where('name', 'LIKE', "%$search%")
+            ->paginate(30);
+    }
 }

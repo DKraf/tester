@@ -2,12 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Spatie\Permission\Models\Role;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
@@ -49,4 +46,19 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+
+    /**
+     * @param $search
+     * @return mixed
+     */
+    public function search($search)
+    {
+        return User::orderBy('users.id','DESC')
+            ->where('users.first_name', 'LIKE', "%$search%")
+            ->orWhere('users.last_name', 'LIKE', "%$search%" )
+            ->leftJoin('position', 'users.position_id', '=', 'position.id')
+            ->leftJoin('company', 'users.company_id', '=', 'company.id')
+            ->select('users.*', 'position.name as position_name', 'company.name as company_name')
+            ->paginate(30);
+    }
 }

@@ -33,9 +33,9 @@ class PositionController extends Controller
      */
     public function index()
     {
-        $data = Position::latest()->paginate(5);
+        $data = Position::latest()->paginate(30);
         return view('admin.Position.index',compact('data'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
+            ->with('i', (request()->input('page', 1) - 1) * 30);
     }
 
 
@@ -67,6 +67,7 @@ class PositionController extends Controller
         return redirect()->route('position.index')
             ->with('success', 'Должность успешно создана');
     }
+
 
     /**
      * Отобразить указанный ресурс.
@@ -113,6 +114,7 @@ class PositionController extends Controller
             ->with('success', 'Должность успешно обновлена');
     }
 
+
     /**
      * Удалить указанный ресурс из хранилища.
      *
@@ -125,5 +127,20 @@ class PositionController extends Controller
 
         return redirect()->route('position.index')
             ->with('success','Должность успешно удалена');
+    }
+
+
+    /**
+     * Поиск
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function search(Request $request)
+    {
+        $search = $request->input('search');
+        $data = Position::search($search);
+
+        return view('admin.Position.index',compact('data'))
+            ->with('i', (request()->input('page', 1) - 1) * 30);
     }
 }

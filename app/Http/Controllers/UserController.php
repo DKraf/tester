@@ -31,6 +31,7 @@ class UserController extends Controller
             ->with('i', ($request->input('page', 1) - 1) * 30);
     }
 
+
     /**
      * Вывести форму для создания нового ресурса.
      *
@@ -45,11 +46,13 @@ class UserController extends Controller
         return view('admin.users.create',compact('roles','position','company','pass'));
     }
 
+
     /**
      * Поместить только что созданный ресурс в хранилище.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request)
     {
@@ -59,8 +62,6 @@ class UserController extends Controller
             'company_id' => 'required',
             'position_id' => 'required',
             'login' => 'required|unique:users,login',
-//            'email' => 'unique:email',
-//            'password' => 'required|same:confirm-password',
             'roles' => 'required'
         ],
         [
@@ -79,11 +80,6 @@ class UserController extends Controller
         );
 
         $input = $request->all();
-        $flag =  User::where('login', '=',$input['login'] or 'email' , '=' , $input['email'])->first()->toArray();
-        if (sizeof($flag)) {
-            return redirect()->route('users.index')
-                ->with('warning','Ошибка создания пользователя, пользователь с таким email или Login существует');
-        }
         $input['password'] = Hash::make($input['password']);
 
         $user = User::create($input);
@@ -104,12 +100,13 @@ class UserController extends Controller
         $user = User::find($id);
         $position = Position::find($user->position_id);
         $company = Company::find($user->company_id);
+
         return view('admin.users.show',compact('user', 'position', 'company'));
     }
 
+
     /**
      * Отобразить форму для редактирования указанного
-
      * ресурса.
      *
      * @param  int  $id
@@ -121,25 +118,25 @@ class UserController extends Controller
         $roles = Role::pluck('name','name')->all();
         $position = Position::pluck('name','id')->all();
         $company = Company::pluck('name','id')->all();
-
         $userRole = $user->roles->pluck('name','name')->all();
 
         return view('admin.users.edit',compact('user','roles','userRole','position','company'));
     }
 
+
     /**
      * Обновить указанный ресурс в хранилище.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function update(Request $request, $id)
     {
         $this->validate($request, [
             'first_name' => 'required',
             'last_name' => 'required',
-            'email' => 'required|email',
             'roles' => 'required'
         ],
             [
@@ -157,10 +154,19 @@ class UserController extends Controller
             ]);
 
         $input = $request->all();
+
         if(!empty($input['password'])){
             $input['password'] = Hash::make($input['password']);
         }else{
             $input = Arr::except($input,array('password'));
+        }
+
+        if (isset($input['email'])) {
+            $flag = User::where('email', $input['email'])->get()->toArray();
+            if (sizeof($flag)) {
+                return redirect()->route('users.index')
+                    ->with('warning', 'Ошибка редактирования пользователя, пользователь с таким email существует');
+            }
         }
 
         $user = User::find($id);
@@ -173,6 +179,7 @@ class UserController extends Controller
             ->with('success','Пользователь успешно обнавлен!');
     }
 
+
     /**
      * Удалить указанный ресурс из хранилища
      *
@@ -183,24 +190,29 @@ class UserController extends Controller
     {
         User::find($id)->delete();
         return redirect()->route('users.index')
-            ->with('success','User deleted successfully');
+            ->with('success','Пользователь успешно удален');
     }
 
+
+    /**
+     * Поиск
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function search(Request $request)
     {
         $search = $request->input('search');
-        $data = User::orderBy('users.id','DESC')
-            ->where('users.first_name', 'LIKE', "%$search%")
-            ->orWhere('users.last_name', 'LIKE', "%$search%" )
-            ->leftJoin('position', 'users.position_id', '=', 'position.id')
-            ->leftJoin('company', 'users.company_id', '=', 'company.id')
-            ->select('users.*', 'position.name as position_name', 'company.name as company_name')
-            ->paginate(30);
+        $data = User::search($search);
+
         return view('admin.users.index',compact('data'))
             ->with('i', ($request->input('page', 1) - 1) * 30);
     }
 
 
+    /**
+     * Редактирование профиля вьюха
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function userEdit()
     {
         $userId = Auth::id();
@@ -213,7 +225,13 @@ class UserController extends Controller
         return view('user.users.edit',compact('user','position','company'));
     }
 
-
+    /**
+     * Редактирвоание профиля
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Validation\ValidationException
+     */
     public function userChange(Request $request, $id)
     {
         $this->validate($request, [
@@ -234,6 +252,14 @@ class UserController extends Controller
 
         $input = $request->all();
 
+        if (isset($input['email'])) {
+            $flag = User::where('email', $input['email'])->get()->toArray();
+            if (sizeof($flag)) {
+                return redirect()->route('user.edit')
+                    ->with('warning', 'Ошибка редактирования профиля, пользователь с таким email существует');
+            }
+        }
+
         $user = User::find($id);
         $user->update($input);
 
@@ -241,10 +267,23 @@ class UserController extends Controller
             ->with('success','Пользователь успешно обнавлен!');
     }
 
+
+    /**
+     * Смена пароля вьюха
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function changePassword()
     {
         return view('user.users.editpassword');
     }
+
+
+    /**
+     * Редактирование пароля
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Validation\ValidationException
+     */
     public function editUserPassword(Request $request)
     {
         $this->validate($request, [
@@ -262,13 +301,11 @@ class UserController extends Controller
             ]
         );
         $userId = Auth::id();
-
         $input = $request->all();
 
         $input['password'] = Hash::make($input['password']);
 
         $user = User::find($userId);
-
         $user->update([
             'password'=> $input['password']
         ]);
@@ -277,6 +314,12 @@ class UserController extends Controller
             ->with('success','Пароль успешно изменен!');
     }
 
+
+    /**
+     * Сброс пароля на стандартный
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function resetPassword($id)
     {
         $user = User::find($id);

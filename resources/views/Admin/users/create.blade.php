@@ -32,13 +32,13 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Имя:</strong>
-                {!! Form::text('first_name', null, array('placeholder' => 'Имя','class' => 'form-control')) !!}
+                {!! Form::text('first_name', null, array('placeholder' => 'Имя','class' => 'form-control','id'=>'lastname_input')) !!}
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Фамилия:</strong>
-                {!! Form::text('last_name', null, array('placeholder' => 'Фамилия','class' => 'form-control')) !!}
+                {!! Form::text('last_name', null, array('placeholder' => 'Фамилия','class' => 'form-control', 'id'=>'firstname_input')) !!}
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
@@ -49,28 +49,31 @@
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Логин:</strong>
-                {!! Form::text('login', null, array('placeholder' => 'Логин','class' => 'form-control')) !!}
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
                 <strong>Email:</strong>
                 {!! Form::text('email', null, array('placeholder' => 'Email','class' => 'form-control')) !!}
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Пароль:</strong>
-                {!! Form::text('password', $pass, array('value'  => $pass,'class' => 'form-control')) !!}
+                <strong>Логин:</strong>
+                {!! Form::text('login', null, array('placeholder' => 'Логин','class' => 'form-control text-danger', 'id'=>'login_input')) !!}
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Повторите пароль:</strong>
-                {!! Form::text('confirm-password', $pass, array('value' => $pass,'class' => 'form-control')) !!}
+                <strong>Пароль:</strong>
+                {!! Form::text('password', $pass, array('value'  => $pass,'class' => 'form-control text-danger')) !!}
+                <input type="text" name="confirm-password" value="{{ $pass }}" class="form-control" placeholder="Name" hidden>
+
             </div>
         </div>
+{{--        <div class="col-xs-12 col-sm-12 col-md-12">--}}
+{{--            <div class="form-group">--}}
+
+{{--                <strong>Повторите пароль:</strong>--}}
+{{--                {!! Form::text('confirm-password', $pass, array('value' => $pass,'class' => 'form-control')) !!}--}}
+{{--            </div>--}}
+{{--        </div>--}}
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Организация:</strong>

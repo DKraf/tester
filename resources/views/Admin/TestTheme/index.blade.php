@@ -6,12 +6,23 @@
             <div class="pull-left">
                 <h2>Тематики тестов:</h2>
             </div>
-            <div class="pull-right">
+            <div class="pull-right ml-3 mr-3">
                 @can('testtheme-create')
                     <a class="btn btn-success" href="{{ route('test-theme.create') }}">
                         <i class="bi bi-plus-square"></i>
                     </a>
                 @endcan
+            </div>
+            <div class="pull-right ml-3 mr-3">
+                <form action="{{ route('testthemesearch') }}"  method="get">
+                    <input name="search"  placeholder="Искать здесь..." type="search" autocomplete="off">
+                    <button type="submit" title="Искать...">
+                        <i class="bi bi-search"></i>
+                    </button>
+                    <a  title="Отменить параметры поиска" href="{{ route('test-theme.index') }}">
+                        <i class="bi bi-backspace"></i>
+                    </a>
+                </form>
             </div>
         </div>
     </div>

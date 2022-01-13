@@ -6,12 +6,23 @@
             <div class="pull-left">
                 <h2>Компании:</h2>
             </div>
-            <div class="pull-right">
+            <div class="pull-right ml-3 mr-3">
                 @can('company-create')
                     <a class="btn btn-success" href="{{ route('company.create') }}">
                         <i class="bi bi-plus-square"></i>
                     </a>
                 @endcan
+            </div>
+            <div class="pull-right ml-3 mr-3">
+                <form action="{{ route('companysearch') }}"  method="get">
+                    <input name="search"  placeholder="Искать здесь..." type="search" autocomplete="off">
+                    <button type="submit" title="Искать...">
+                        <i class="bi bi-search"></i>
+                    </button>
+                    <a  title="Отменить параметры поиска" href="{{ route('company.index') }}">
+                        <i class="bi bi-backspace"></i>
+                    </a>
+                </form>
             </div>
         </div>
     </div>

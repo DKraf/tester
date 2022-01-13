@@ -23,6 +23,7 @@ class TestController extends Controller
   //
     }
 
+
     /**
      * Вывести форму для создания нового ресурса.
      *
@@ -38,11 +39,13 @@ class TestController extends Controller
         return view('admin.test.create',compact('id'));
     }
 
+
     /**
      * Поместить только что созданный ресурс в хранилище.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request)
     {
@@ -86,10 +89,9 @@ class TestController extends Controller
         return view('admin.test.show',compact('test'));
     }
 
-    /**
-     * Отобразить форму для редактирования указанного
 
-     * ресурса.
+    /**
+     * Отобразить форму для редактирования указанногоресурса.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -101,12 +103,14 @@ class TestController extends Controller
         return view('admin.test.edit',compact('test'));
     }
 
+
     /**
      * Обновить указанный ресурс в хранилище.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function update(Request $request, $id)
     {
@@ -135,6 +139,7 @@ class TestController extends Controller
         return redirect()->route('test-theme.show',$request->test_theme_id)
             ->with('success','Тест успешно обнавлен!');
     }
+
 
     /**
      * Удалить указанный ресурс из хранилища

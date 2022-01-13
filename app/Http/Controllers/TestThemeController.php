@@ -26,6 +26,8 @@ class TestThemeController extends Controller
         $this->middleware('permission:testtheme-edit', ['only' => ['edit','update']]);
         $this->middleware('permission:testtheme-delete', ['only' => ['destroy']]);
     }
+
+
     /**
      * Отобразить список ресурсов.
      *
@@ -38,6 +40,7 @@ class TestThemeController extends Controller
             ->with('i', (request()->input('page', 1) - 1) * 30);
     }
 
+
     /**
      * Отобразить форму для создания нового ресурса.
      *
@@ -47,6 +50,7 @@ class TestThemeController extends Controller
     {
         return view('admin.testtheme.create');
     }
+
 
     /**
      * Поместить только что созданный ресурс в хранилище.
@@ -70,6 +74,7 @@ class TestThemeController extends Controller
             ->with('Тематика тестов успешно добавлена.');
     }
 
+
     /**
      * Отобразить указанный ресурс.
      *
@@ -85,6 +90,7 @@ class TestThemeController extends Controller
         return view('admin.testtheme.show',compact('test_theme', 'data'))
             ->with('i', ($request->input('page', 1) - 1) * 30);
     }
+
 
     /**
      * Отобразить форму для редактирования указанного
@@ -122,6 +128,7 @@ class TestThemeController extends Controller
             ->with('Тематика теста успешно обновлен');
     }
 
+
     /**
      * Удалить указанный ресурс из хранилища.
      *
@@ -136,4 +143,20 @@ class TestThemeController extends Controller
         return redirect()->route('test-theme.index')
             ->with('Тематика теста успешно удален');
     }
+
+
+    /**
+     * Поиск
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function search(Request $request)
+    {
+        $search = $request->input('search');
+        $data = TestTheme::search($search);
+
+        return view('admin.testtheme.index',compact('data'))
+            ->with('i', (request()->input('page', 1) - 1) * 30);
+    }
+
 }

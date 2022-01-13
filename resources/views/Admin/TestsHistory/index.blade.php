@@ -8,6 +8,17 @@
             </div>
         </div>
     </div>
+    <div class="pull-right ml-3 mr-3">
+        <form action="{{ route('testassignhistorysearch') }}"  method="get">
+            <input name="search"  placeholder="Искать здесь..." type="search" autocomplete="off">
+            <button type="submit" title="Искать...">
+                <i class="bi bi-search"></i>
+            </button>
+            <a  title="Отменить параметры поиска" href="{{ route('testhistory') }}">
+                <i class="bi bi-backspace"></i>
+            </a>
+        </form>
+    </div>
     @if (sizeof($data) > 0)
         <div class="table-responsive">
         <table class="table table-bordered table-striped">
@@ -18,6 +29,7 @@
                <th>Тип</th>
                <th>Дата прохождения</th>
                <th>Затраченное время</th>
+               <th>Результат</th>
                <th width="280px">Действия</th>
            </tr>
            @foreach ($data as $test_assign)
@@ -28,10 +40,18 @@
                    <td>{{ $test_assign->type }} </td>
                    <td> {{ $test_assign->date_done }} </td>
                    <td>{{ $test_assign->time_spent }} мин. </td>
-
+                   <td> @if(!empty($test_assign->true_answer_count) &&  ((int)$test_assign->true_answer_count >= (int)$test_assign->min_question_count))
+                           Сдал
+                       @else
+                           Не сдал
+                       @endif
+                   </td>
                    <td>
                        <a class="btn btn-info" href="{{ route('testhistoryshow',$test_assign->id) }}">
                            <i class="bi bi-binoculars"></i>
+                       </a>
+                       <a class="btn btn-success" href="{{ route('downloadResult',$test_assign->id) }}">
+                           <i class="bi bi-download"></i>
                        </a>
                    </td>
                </tr>
@@ -42,6 +62,5 @@
         <p class="text-center text-danger">Пока нет ни одного назначенного теста!</p>
     @endif
        {!! $data->links() !!}
-
     <p class="text-center text-primary"><small>	&#169 2021.  ТОО "Инженер-2015"</small></p>
    @endsection

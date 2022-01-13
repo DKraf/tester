@@ -6,12 +6,24 @@
             <div class="pull-left">
                 <h2>Должности:</h2>
             </div>
-            <div class="pull-right">
+
+            <div class="pull-right ml-3 mr-3">
                 @can('position-create')
                     <a class="btn btn-success" href="{{ route('position.create') }}">
                         <i class="bi bi-plus-square"></i>
                     </a>
                 @endcan
+            </div>
+            <div class="pull-right ml-3 mr-3">
+                <form action="{{ route('positionsearch') }}"  method="get">
+                    <input name="search"  placeholder="Искать здесь..." type="search" autocomplete="off">
+                    <button type="submit" title="Искать...">
+                        <i class="bi bi-search"></i>
+                    </button>
+                    <a  title="Отменить параметры поиска" href="{{ route('position.index') }}">
+                        <i class="bi bi-backspace"></i>
+                    </a>
+                </form>
             </div>
         </div>
     </div>
@@ -21,6 +33,7 @@
             <p>{{ $message }}</p>
         </div>
     @endif
+
     @if (sizeof($data) > 0)
         <div class="table-responsive">
         <table class="table table-bordered table-striped">

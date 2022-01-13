@@ -78,11 +78,11 @@
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>Статус теста:</strong>
+                    <strong>Результат:</strong>
                     @if(!empty($test_assign->true_answer_count) &&  ((int)$test_assign->true_answer_count >= (int)$test_assign->min_question_count))
-                        Пройден!
+                        Сдал
                     @else
-                        Не пройден, не набранно нужное колличество правильных ответов!
+                        Не сдал
                     @endif
                 </div>
             </div>
