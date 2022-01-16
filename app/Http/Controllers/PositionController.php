@@ -34,7 +34,7 @@ class PositionController extends Controller
     public function index()
     {
         $data = Position::latest()->paginate(30);
-        return view('admin.Position.index',compact('data'))
+        return view('admin.position.index',compact('data'))
             ->with('i', (request()->input('page', 1) - 1) * 30);
     }
 
@@ -140,7 +140,7 @@ class PositionController extends Controller
         $search = $request->input('search');
         $data = Position::search($search);
 
-        return view('admin.Position.index',compact('data'))
+        return view('admin.position.index',compact('data'))
             ->with('i', (request()->input('page', 1) - 1) * 30);
     }
 }
