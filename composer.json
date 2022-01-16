@@ -1,11 +1,11 @@
 {
-    "name": "laravel/laravel",
+    "name": "injener2015/injener2015",
     "type": "project",
-    "description": "The Laravel Framework.",
+    "description": "Web site for employees testing",
     "keywords": ["framework", "laravel"],
     "license": "MIT",
     "require": {
-        "php": "7.4.19",
+        "php": "7.4.25",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.65",
