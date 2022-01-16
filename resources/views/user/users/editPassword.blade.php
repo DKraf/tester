@@ -31,19 +31,19 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Старый пароль:</strong>
-                    <input type="text" name="old-password" class="form-control" placeholder="Текущий пароль">
+                    <input type="password" name="old-password" class="form-control" placeholder="Текущий пароль">
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Новый пароль:</strong>
-                    <input type="text" name="password" class="form-control" placeholder="Новый пароль">
+                    <input type="password" name="password" class="form-control" placeholder="Новый пароль">
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Повторите пароль:</strong>
-                    <input type="text" name="confirm-password" class="form-control" placeholder="Повторите новый пароль">
+                    <input type="password" name="confirm-password" class="form-control" placeholder="Повторите новый пароль">
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">

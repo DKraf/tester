@@ -64,7 +64,7 @@ class AssigenTestController extends Controller
 
         $data = $this->status_service->checkDateForStatus($data);
 
-        return view('admin.assigentest.index',compact('data'))
+        return view('admin.assigenTest.index',compact('data'))
             ->with('i', ($request->input('page', 1) - 1) * 30);
     }
 
@@ -83,7 +83,7 @@ class AssigenTestController extends Controller
         $themes= TestTheme::orderBy('id','DESC')->get();
         $types = TestType::orderBy('id','DESC')->get();
 
-        return view('admin.assigentest.create', compact('users', 'themes', 'types'));
+        return view('admin.assigenTest.create', compact('users', 'themes', 'types'));
     }
 
 
@@ -171,7 +171,7 @@ class AssigenTestController extends Controller
             ->get();
 
         $data = $status_service->checkDateForStatus($data);
-        return view('admin.assigentest.show',compact('data', 'tests'));
+        return view('admin.assigenTest.show',compact('data', 'tests'));
     }
 
 
@@ -193,7 +193,7 @@ class AssigenTestController extends Controller
         $themes= TestTheme::orderBy('id','DESC')->get();
         $types = TestType::orderBy('id','DESC')->get();
 
-        return view('admin.assigentest.edit',compact('test', 'users' , 'themes' ,'types'));
+        return view('admin.assigenTest.edit',compact('test', 'users' , 'themes' ,'types'));
     }
 
     /**
@@ -358,7 +358,7 @@ class AssigenTestController extends Controller
 
         $data = $this->status_service->checkDateForStatus($data);
 
-        return view('user.assigentest.index',compact('data'))
+        return view('user.assigenTest.index',compact('data'))
             ->with('i', ($request->input('page', 1) - 1) * 30);
     }
 
@@ -402,7 +402,7 @@ class AssigenTestController extends Controller
         $test = AssigenTest::find($id);
         $test->update(['is_started'=>true]);
 
-        return view('user.assigentest.take',compact('data', 'tests'))
+        return view('user.assigenTest.take',compact('data', 'tests'))
             ->with('i');
     }
 
@@ -475,7 +475,7 @@ class AssigenTestController extends Controller
         $data = $data_temp['data'];
         $tests = $data_temp['tests'];
 
-        return view('user.testsistory.show',compact('data', 'tests'))
+        return view('user.testsHistory.show',compact('data', 'tests'))
             ->with('i');
     }
 
@@ -490,7 +490,7 @@ class AssigenTestController extends Controller
         $search = $request->input('search');
         $data = AssigenTest::search($search);
 
-        return view('admin.assigentest.index',compact('data'))
+        return view('admin.assigenTest.index',compact('data'))
             ->with('i', ($request->input('page', 1) - 1) * 30);
     }
 

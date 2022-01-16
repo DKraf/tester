@@ -151,6 +151,6 @@ class TestController extends Controller
     {
         Test::find($id)->delete();
         return redirect()->route('test-theme.index')
-            ->with('Тест удален Успешно');
+            ->with('success','Тест удален Успешно');
     }
 }

@@ -35,7 +35,7 @@ class TestTypeController extends Controller
     public function index()
     {
         $data = TestType::latest()->paginate(30);
-        return view('admin.testtype.index',compact('data'))
+        return view('admin.testType.index',compact('data'))
             ->with('i', (request()->input('page', 1) - 1) * 30);
     }
 
@@ -93,7 +93,7 @@ class TestTypeController extends Controller
     {
         $test_type['min_procent'] = ($test_type['questions_count'] / $test_type['min_question_count']) * 100;
 
-        return view('admin.testtype.show',compact('test_type'));
+        return view('admin.testType.show',compact('test_type'));
     }
 
 
@@ -107,7 +107,7 @@ class TestTypeController extends Controller
     public function edit(TestType $test_type)
     {
         $test_type['min_procent'] = ($test_type['min_question_count'] / $test_type['questions_count'])  * 100 ;
-        return view('admin.testtype.edit',compact('test_type'));
+        return view('admin.testType.edit',compact('test_type'));
     }
 
 
@@ -169,7 +169,7 @@ class TestTypeController extends Controller
         $search = $request->input('search');
         $data = TestType::search($search);
 
-        return view('admin.testtype.index',compact('data'))
+        return view('admin.testType.index',compact('data'))
             ->with('i', (request()->input('page', 1) - 1) * 30);
     }
 }

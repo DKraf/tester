@@ -44,13 +44,13 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Должность:</strong>
-                {{ $position->name}}
+                @if (!is_null($position)){{ $position->name}}@endif
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Организация:</strong>
-                {{ $company->name }}
+                @if (!is_null($position)){{ $company->name }}@endif
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">

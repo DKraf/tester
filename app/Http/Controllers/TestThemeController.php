@@ -36,7 +36,7 @@ class TestThemeController extends Controller
     public function index()
     {
         $data = TestTheme::latest()->paginate(30);
-        return view('admin.testtheme.index',compact('data'))
+        return view('admin.testTheme.index',compact('data'))
             ->with('i', (request()->input('page', 1) - 1) * 30);
     }
 
@@ -48,7 +48,7 @@ class TestThemeController extends Controller
      */
     public function create()
     {
-        return view('admin.testtheme.create');
+        return view('admin.testTheme.create');
     }
 
 
@@ -87,7 +87,7 @@ class TestThemeController extends Controller
         $data = Test::orderBy('id','DESC')
             ->where('test_theme_id',$test_theme->id)
             ->paginate(30);
-        return view('admin.testtheme.show',compact('test_theme', 'data'))
+        return view('admin.testTheme.show',compact('test_theme', 'data'))
             ->with('i', ($request->input('page', 1) - 1) * 30);
     }
 
@@ -155,7 +155,7 @@ class TestThemeController extends Controller
         $search = $request->input('search');
         $data = TestTheme::search($search);
 
-        return view('admin.testtheme.index',compact('data'))
+        return view('admin.testTheme.index',compact('data'))
             ->with('i', (request()->input('page', 1) - 1) * 30);
     }
 
