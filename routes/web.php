@@ -10,6 +10,8 @@ use App\Http\Controllers\TestThemeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
+use Illuminate\Support\Facades\Artisan;
+
 
 
 /*
@@ -61,7 +63,9 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/change-password', [UserController::class, 'changePassword'])->name('user.changepass');
         Route::post('/edit-password', [UserController::class, 'editUserPassword'])->name('user.editpass');
 
+
     });
+    Route::get('/optimize', function() { $exitCode = Artisan::call('optimize');var_dump('optimized');});
 
     Route::get('/test-add/{id}', [TestController::class, 'createCustom'])->name('createCustom');
 
