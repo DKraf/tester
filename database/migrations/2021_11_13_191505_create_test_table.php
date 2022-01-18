@@ -18,9 +18,9 @@ class CreateTestTable extends Migration
             $table->integer('test_theme_id');
             $table->text('question');
             $table->text('answer_true');
-            $table->text('answer_1');
-            $table->text('answer_2');
-            $table->text('answer_3');
+            $table->text('A');
+            $table->text('B');
+            $table->text('C');
             $table->timestamps();
         });
     }

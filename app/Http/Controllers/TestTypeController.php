@@ -47,7 +47,7 @@ class TestTypeController extends Controller
      */
     public function create()
     {
-        return view('admin.testtype.create');
+        return view('admin.testType.create');
     }
 
 

@@ -71,7 +71,7 @@ class TestThemeController extends Controller
         TestTheme::create($request->all());
 
         return redirect()->route('test-theme.index')
-            ->with('Тематика тестов успешно добавлена.');
+            ->with('success', 'Тематика тестов успешно добавлена.');
     }
 
 
@@ -101,7 +101,7 @@ class TestThemeController extends Controller
      */
     public function edit(TestTheme $test_theme)
     {
-        return view('admin.testtheme.edit',compact('test_theme'));
+        return view('admin.testTheme.edit',compact('test_theme'));
     }
 
 
@@ -125,7 +125,7 @@ class TestThemeController extends Controller
         $test_theme->update($request->all());
 
         return redirect()->route('test-theme.index')
-            ->with('Тематика теста успешно обновлен');
+            ->with('success','Тематика теста успешно обновлен');
     }
 
 
@@ -137,11 +137,10 @@ class TestThemeController extends Controller
      */
     public function destroy(TestTheme $test_theme)
     {
-        dd($test_theme);
         $test_theme->delete();
 
         return redirect()->route('test-theme.index')
-            ->with('Тематика теста успешно удален');
+            ->with('success','Тематика теста успешно удален');
     }
 
 

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Токен CSRF -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel=”icon” href={{asset('images/logo.png')}} width="75" height="75" type=”image/png”>.
     <title>Инженер - 2015</title>
     <!-- Скрипты -->
     <script src="{{ asset('js/app.js') }}" defer></script>
