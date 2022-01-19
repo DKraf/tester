@@ -137,7 +137,7 @@ class TestTypeController extends Controller
         );
         $save_data = $request->all();
         if ($save_data['questions_count'] < 2) {
-            return redirect()->route('test-type.edit',$save_data->id)
+            return redirect()->route('test-type.edit',$test_type->id)
                 ->with('warning','Ошибка сохранения! Колличество вопросов должно быть не менее 2');
         }
         $save_data['min_question_count'] =  ($save_data['questions_count'] / 100 ) * $save_data['min_procent'];

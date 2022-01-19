@@ -24,7 +24,15 @@
             </ul>
         </div>
     @endif
-
+    @if ($message = Session::get('success'))
+        <div class="alert alert-success">
+            <p>{{ $message }}</p>
+        </div>
+    @elseif($message = Session::get('warning'))
+        <div class="alert alert-warning">
+            <p>{{ $message }}</p>
+        </div>
+    @endif
     <form action="{{ route('test-type.update',$test_type->id) }}" method="POST">
         @csrf
         @method('PUT')
