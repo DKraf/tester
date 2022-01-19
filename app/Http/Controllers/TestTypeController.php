@@ -75,6 +75,10 @@ class TestTypeController extends Controller
             ]
         );
         $input = $request->all();
+        if ($input['questions_count'] < 2) {
+            return redirect()->route('test-type.create')
+                ->with('warning','Ошибка сохранения! Колличество вопросов должно быть не менее 2');
+        }
         $input['min_question_count'] = ($input['questions_count'] / 100 ) * $input['min_procent'];
         TestType::create($input);
 
