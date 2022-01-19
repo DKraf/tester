@@ -96,19 +96,21 @@ class AssigenTestController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'test_theme_id' => 'required',
-            'test_type_id' => 'required',
-            'user_id' => 'required',
+            'test_theme_id' => 'required|integer',
+            'test_type_id' => 'required|integer',
+            'user_id' => 'required|integer',
             'date_start' =>'required',
             'date_end' =>'required',
-
         ],
             [
                 'test_theme_id.required' => 'Тематика теста должена быть заполнена',
+                'test_theme_id.integer' => 'Тематика теста должена быть заполнена',
                 'test_type_id.required' => 'Тип теста должена быть заполнена',
+                'test_type_id.integer' => 'Тип теста должена быть заполнена',
                 'date_start.required' => 'Дата начала теста должна быть заполнена',
                 'date_end.required' => 'Дата окончания теста должна быть заполнена',
-                'user_id.required' => 'Пользователь должен быть заполнен'
+                'user_id.required' => 'Пользователь должен быть заполнен',
+                'user_id.integer' => 'Пользователь должен быть заполнен'
             ]
         );
 

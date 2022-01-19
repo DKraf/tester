@@ -79,7 +79,7 @@ class TestTypeController extends Controller
         TestType::create($input);
 
         return redirect()->route('test-type.index')
-            ->with('Тип тестов успешно добавлен.');
+            ->with('success','Тип тестов успешно добавлен.');
     }
 
 
@@ -136,12 +136,16 @@ class TestTypeController extends Controller
             ]
         );
         $save_data = $request->all();
+        if ($save_data['questions_count'] < 2) {
+            return redirect()->route('test-type.edit')
+                ->with('warning','Ошибка сохранения! Колличество вопросов должно быть не менее 2');
+        }
         $save_data['min_question_count'] =  ($save_data['questions_count'] / 100 ) * $save_data['min_procent'];
 
         $test_type->update($save_data);
 
         return redirect()->route('test-type.index')
-            ->with('Тип теста успешно обновлен');
+            ->with('success','Тип теста успешно обновлен');
     }
 
 
@@ -156,7 +160,7 @@ class TestTypeController extends Controller
         $test_type->delete();
 
         return redirect()->route('test-type.index')
-            ->with('Тип теста успешно удален');
+            ->with('success', 'Тип теста успешно удален');
     }
 
 
