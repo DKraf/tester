@@ -1,27 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <!-- Токен CSRF -->
-        <meta name="csrf-token" content="{{ csrf_token() }}">
-        <link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}">
-        <title>Инженер - 2015</title>
-        <!-- Скрипты -->
-        <script src="{{ asset('js/app.js') }}" defer></script>
-        <script src="{{ asset('js/popper.min.js') }}" defer></script>
-        <script src="{{ asset('js/custom.js') }}" defer></script>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <!-- Токен CSRF -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}">
+    <title>Инженер - 2015</title>
+    <!-- Скрипты -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/popper.min.js') }}" defer></script>
+    <script src="{{ asset('js/custom.js') }}" defer></script>
 
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="{{ asset('css/homestyles.css') }} rel="stylesheet" />
-        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-        <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="{{ asset('css/homestyles.css') }} rel="stylesheet" />
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 
-
-
-    </head>
+</head>
     <body>
         <!-- Responsive navbar-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -37,29 +35,35 @@
                 </div>
             </div>
         </nav>
+        <form action="{{ route('updateindex') }}" enctype="multipart/form-data" method="POST">
+        @csrf
         <!-- Page Content-->
         <div class="container px-4 px-lg-5">
             <!-- Heading Row-->
             <div class="row gx-4 gx-lg-5 align-items-center my-5">
                 <div class="col-lg-7"><img class="img-fluid rounded mb-4 mb-lg-0" src="{{asset('images/900x400.png')}}" alt="..." /></div>
                 <div class="col-lg-5">
-                    <h1 class="font-weight-light">Инженер-2015</h1>
-                    <p>Мы команда которая занимается проведением тестирований и тд и тп.</p>
+{{--                    <h1 class="font-weight-light">Инженер-2015</h1>--}}
+                    <input type="text" name="h1" value="{{ $data->h1 }}" class="form-control" >
+
+                    <input type="text" name="t1" value="{{ $data->t1 }}" class="form-control" >
 {{--                    <a class="btn btn-primary" href="#!">Call to Action!</a>--}}
                 </div>
             </div>
             <!-- Call to Action-->
             <div class="card text-white bg-secondary my-5 py-4 text-center">
-                <div class="card-body"><p class="text-white m-0">Почему люди выбирают нас:</p></div>
+                <div class="card-body"><input type="text" name="t2" value="{{ $data->t2 }}" class="form-control" >
+                </div>
             </div>
             <!-- Content Row-->
             <div class="row gx-4 gx-lg-5">
                 <div class="col-md-4 mb-5">
                     <div class="card h-100">
                         <div class="card-body">
-                            <h2 class="card-title">Качество</h2>
-                            <img id="myImg" src={{asset('storage/image.jpg')}} alt="Snow" style="width:100%;max-width:300px">
-                            <p class="card-text">На рынке с бородатых времен, и мы зарекмендоваи себя как надежные партнеры.</p>
+                            <input type="text" name="h3" value="{{ $data->h3 }}" class="form-control" >
+                            <input type="file" name="image" value="{{ $data->image }}" class="form-control" >
+
+                            <input type="text" name="t3" value="{{ $data->t3 }}" class="form-control" >
                         </div>
 {{--                        <div class="card-footer"><a class="btn btn-primary btn-sm" href="#!">More Info</a></div>--}}
                     </div>
@@ -67,8 +71,8 @@
                 <div class="col-md-4 mb-5">
                     <div class="card h-100">
                         <div class="card-body">
-                            <h2 class="card-title">Скорость</h2>
-                            <p class="card-text">Регистрация и прохождение теста, не займет много времени</p>
+                            <input type="text" name="h4" value="{{ $data->h4 }}" class="form-control" >
+                            <input type="text" name="t4" value="{{ $data->t4 }}" class="form-control" >
                         </div>
 {{--                        <div class="card-footer"><a class="btn btn-primary btn-sm" href="#!">More Info</a></div>--}}
                     </div>
@@ -76,14 +80,18 @@
                 <div class="col-md-4 mb-5">
                     <div class="card h-100">
                         <div class="card-body">
-                            <h2 class="card-title">Сервис</h2>
-                            <p class="card-text">Мы всегда с радостью проконсультируем и ответим на все интересующие вас вопросы</p>
+                            <input type="text" name="h5" value="{{ $data->h5 }}" class="form-control" >
+                            <input type="text" name="t5" value="{{ $data->t5 }}" class="form-control" >
                         </div>
 {{--                        <div class="card-footer"><a class="btn btn-primary btn-sm" href="#!">More Info</a></div>--}}
                     </div>
                 </div>
             </div>
         </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                <button type="submit" class="btn btn-primary">Сохранить</button>
+            </div>
+        </form>
         <!-- Footer-->
         <footer class="py-5 bg-dark">
             <div class="container px-4 px-lg-5"><p class="m-0 text-center text-white">&copy;2021 Инженер-2015</p></div>
@@ -91,17 +99,6 @@
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
-{{--        <script src="js/scripts.js"></script>--}}
+        <script src="js/scripts.js"></script>
     </body>
-
-
-    <!-- The Modal -->
-    <div id="myModal" class="modal">
-        <!-- The Close Button -->
-        <span class="close">&times;</span>
-        <!-- Modal Content (The Image) -->
-        <img class="modal-content" id="img01">
-        <!-- Modal Caption (Image Text) -->
-        <div id="caption"></div>
-    </div>
 </html>

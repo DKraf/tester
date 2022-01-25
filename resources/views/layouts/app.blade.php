@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Токен CSRF -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel=”icon” href={{asset('images/logo.png')}} width="75" height="75" type=”image/png”>.
+    <link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}">
     <title>Инженер - 2015</title>
     <!-- Скрипты -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -31,8 +31,9 @@
             </div>
             <div class="list-group list-group-flush">
                 @role('Admin')
-                <a class="list-group-item list-group-item-action list-group-item-light p-3 " href="/user/edit"><i class="bi bi-person-circle"></i> Настройка профиля</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3 " href="/users"><i class="bi bi-people"></i> Пользователи</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 " href="/admin/edit-index"><i class="bi bi-sliders"></i> Настройка страницы</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 " href="/user/edit"><i class="bi bi-person-circle"></i> Настройка профиля</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3 " href="/users"><i class="bi bi-people"></i> Пользователи</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3 " href="/roles"><i class="bi bi-person-check"></i> Роли</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3 " href="/position"><i class="bi bi-mortarboard"></i> Должности</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3 " href="/company"><i class="bi bi-building"></i> Компании</a>

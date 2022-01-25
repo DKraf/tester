@@ -11,7 +11,7 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Artisan;
-
+use App\Http\Controllers\HomePageController;
 
 
 /*
@@ -48,6 +48,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/testhistory/{id}', [AssigenTestController::class, 'testsHistoryShow'])->name('testhistoryshow');
         Route::get('/testhistory', [AssigenTestController::class, 'testsHistory'])->name('testhistory');
         Route::get('/reset-password/{id}', [UserController::class, 'resetPassword'])->name('resetpassword');
+        Route::get('/edit-index', [HomePageController::class, 'index'])->name('editindex');
+        Route::post('/update-index', [HomePageController::class, 'update'])->name('updateindex');
 
     });
 

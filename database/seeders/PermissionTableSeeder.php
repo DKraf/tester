@@ -43,6 +43,8 @@ class PermissionTableSeeder extends Seeder
             'assigntest-create',
             'assigntest-edit',
             'assigntest-delete',
+            'homepage-list',
+            'homepage-edit'
         ];
 
         foreach ($permissions as $permission) {
