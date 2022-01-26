@@ -61,8 +61,7 @@
                     <div class="card h-100">
                         <div class="card-body">
                             <input type="text" name="h3" value="{{ $data->h3 }}" class="form-control" >
-                            <input type="file" name="image" value="{{ $data->image }}" class="form-control" >
-
+                            <input type="file" name="image1" value="{{ $data->image1 }}" class="form-control">
                             <input type="text" name="t3" value="{{ $data->t3 }}" class="form-control" >
                         </div>
 {{--                        <div class="card-footer"><a class="btn btn-primary btn-sm" href="#!">More Info</a></div>--}}
@@ -72,6 +71,7 @@
                     <div class="card h-100">
                         <div class="card-body">
                             <input type="text" name="h4" value="{{ $data->h4 }}" class="form-control" >
+                            <input type="file" name="image2" value="{{ $data->image2 }}" class="form-control">
                             <input type="text" name="t4" value="{{ $data->t4 }}" class="form-control" >
                         </div>
 {{--                        <div class="card-footer"><a class="btn btn-primary btn-sm" href="#!">More Info</a></div>--}}
@@ -81,6 +81,7 @@
                     <div class="card h-100">
                         <div class="card-body">
                             <input type="text" name="h5" value="{{ $data->h5 }}" class="form-control" >
+                            <input type="file" name="image3" value="{{ $data->image3 }}" class="form-control">
                             <input type="text" name="t5" value="{{ $data->t5 }}" class="form-control" >
                         </div>
 {{--                        <div class="card-footer"><a class="btn btn-primary btn-sm" href="#!">More Info</a></div>--}}

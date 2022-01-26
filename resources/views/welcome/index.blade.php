@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <title>Инженер - 2015</title>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
+        <meta name="description" content="Сертифицированный учебный центр 'Инженер 2015', оказывает услуги по тестированию сотрудников" />
+        <meta name="author" content="Kravchenko Dmitriy DKRAF-DEV" />
+        <meta name="robots" content="index, follow" />
+        <meta name="keywords" content="Инженер 2015, injener2015, тестирование сотрудников, сертификация, подтверждение квалификации, обучение по промышленной безопасности, профессиональная переподготовка, обучение по промышленной безопасности, учебный центр Караганда" />
+
         <!-- Токен CSRF -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}">
-        <title>Инженер - 2015</title>
         <!-- Скрипты -->
         <script src="{{ asset('js/app.js') }}" defer></script>
         <script src="{{ asset('js/popper.min.js') }}" defer></script>
@@ -18,8 +21,6 @@
         <link href="{{ asset('css/homestyles.css') }} rel="stylesheet" />
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <link href="{{ asset('css/style.css') }}" rel="stylesheet">
-
-
 
     </head>
     <body>
@@ -58,7 +59,7 @@
                     <div class="card h-100">
                         <div class="card-body">
                             <h2 class="card-title">Качество</h2>
-                            <img id="myImg" src={{asset('storage/image.jpg')}} alt="Snow" style="width:100%;max-width:300px">
+                            <img id="myImg" src={{asset('storage/image1.jpg')}} alt="Snow" style="width:100%;max-width:300px">
                             <p class="card-text">На рынке с бородатых времен, и мы зарекмендоваи себя как надежные партнеры.</p>
                         </div>
 {{--                        <div class="card-footer"><a class="btn btn-primary btn-sm" href="#!">More Info</a></div>--}}

@@ -44,15 +44,26 @@ class HomePageController extends Controller
     public function update(Request $request)
     {
 
-        $image = null;
-        if (isset($request->image)) {
-            $name = 'image';
-            $extension = $request->image->getClientOriginalExtension();
-            $filename = $name . '.' . $extension;
-            $image = $request->image->storeAs('public', $filename);
+        $image1 = $image2 = $image3 = null;
+
+        if (isset($request->image1)) {
+            $name = 'image1';
+            $image1 = $this->uploadImage($request->image1, $name);
         }
+        if (isset($request->image2)) {
+            $name = 'image2';
+            $image2 = $this->uploadImage($request->image2, $name);
+        }
+        if (isset($request->image3)) {
+            $name = 'image3';
+            $image3 = $this->uploadImage($request->image3, $name);
+        }
+
         $request = $request->all();
-        $request['image'] = $image;
+        $request['image1'] = $image1;
+        $request['image2'] = $image2;
+        $request['image3'] = $image3;
+
         $save_data = array_filter($request);
 
         $home_page = HomePage::find(1);
@@ -60,6 +71,15 @@ class HomePageController extends Controller
         $home_page->update(($save_data));
         return redirect()->route('/')
             ->with('success', 'Компания успешно обновлена');
+    }
+
+    private function uploadImage($img_obj, $name_it)
+    {
+        $name = $name_it;
+        $extension = $img_obj->getClientOriginalExtension();
+        $filename = $name . '.' . $extension;
+        return $img_obj->storeAs('storage', $filename);
+        return $img_obj->storeAs('storage', $filename);
     }
 
 
