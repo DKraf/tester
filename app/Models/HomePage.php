@@ -29,9 +29,13 @@ class HomePage extends Model
         't4',
         'h5',
         't5',
-        'image',
+        'image1',
+        'image2',
+        'image3',
         'f1',
-        'f2'
+        'f2',
+        'fh1',
+        'fh2'
     ];
 
 

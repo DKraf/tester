@@ -34,10 +34,8 @@ class HomePageController extends Controller
     public function index()
     {
         $data = HomePage::first();
-        return view('admin.homePage.index',compact('data'));
-//
-//        return view('admin.homePage.index',compact('data'))
-//            ->with('i', (request()->input('page', 1) - 1) * 30);
+        return view('admin.homePage.index', compact('data'));
+
     }
 
 
@@ -45,7 +43,7 @@ class HomePageController extends Controller
     {
 
         $image1 = $image2 = $image3 = null;
-
+        $path = 'storage/';
         if (isset($request->image1)) {
             $name = 'image1';
             $image1 = $this->uploadImage($request->image1, $name);
@@ -60,17 +58,23 @@ class HomePageController extends Controller
         }
 
         $request = $request->all();
-        $request['image1'] = $image1;
-        $request['image2'] = $image2;
-        $request['image3'] = $image3;
+        $request['image1'] = ($image1) ? $path.$image1 : null;
+        $request['image2'] = ($image2) ? $path.$image2 : null;
+        $request['image3'] = ($image3) ? $path.$image3 : null;
 
         $save_data = array_filter($request);
 
         $home_page = HomePage::find(1);
 
         $home_page->update(($save_data));
-        return redirect()->route('/')
+        return redirect()->route('showindex')
             ->with('success', 'Компания успешно обновлена');
+    }
+
+    public function show()
+    {
+        $data = HomePage::first();
+        return view('welcome.index', compact('data'));
     }
 
     private function uploadImage($img_obj, $name_it)
@@ -78,8 +82,8 @@ class HomePageController extends Controller
         $name = $name_it;
         $extension = $img_obj->getClientOriginalExtension();
         $filename = $name . '.' . $extension;
-        return $img_obj->storeAs('storage', $filename);
-        return $img_obj->storeAs('storage', $filename);
+        $img_obj->storeAs('public', $filename);
+        return $filename;
     }
 
 
