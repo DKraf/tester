@@ -510,4 +510,22 @@ class AssigenTestController extends Controller
         return view('admin.testsHistory.index',compact('data'))
             ->with('i', ($request->input('page', 1) - 1) * 30);
     }
+
+    public function refreshTest($id)
+    {
+        $test = AssigenTest::find($id);
+
+        $tests = Test::where('test_theme_id',$test->test_theme_id)
+            ->pluck('question', 'id')->all();
+
+        $test_type = TestType::find($test->test_type_id);
+        $this->status_service->deleteAssigenTestQuestion($test->id);
+
+        $this->status_service->AssigenTestQuestion($id, $test_type->questions_count, $tests );
+
+        $test->update(['is_started' => false]);
+
+        return redirect()->route('test-assign.index')
+            ->with('success','Тест переназначен');
+    }
 }

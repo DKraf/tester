@@ -62,6 +62,11 @@
                                <a class="btn btn-primary" href="{{ route('test-assign.edit',$test_assign->id) }}">
                                    <i class="bi bi-pencil"></i>
                                </a>
+                               @if($test_assign->status == 'Начат ранее')
+                                   <a class="btn btn-success" href="{{ route('refreshtest',$test_assign->id) }}">
+                                       <i class="bi bi-arrow-clockwise"></i>
+                                   </a>
+                                   @endif
                            @endcan
 
                            @csrf

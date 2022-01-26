@@ -23,5 +23,17 @@ class AdminAssignTestQuestion
         }
         return true;
     }
+
+
+    /**
+     * Удаление назначенных тестов
+     * @param $id
+     */
+    public static function deleteAssignQuestion($id)
+    {
+        AssigenTestQuestion::where('assigen_test_id',$id)->delete();
+    }
+
+
 }
 

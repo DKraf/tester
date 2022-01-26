@@ -105,22 +105,21 @@
 {{--        <script src="js/scripts.js"></script>--}}
     </body>
 
-
-    <div id="myModal1" class="modal">
+    <div id="myModal1" class="modal" style="display: none">
         <span id="span1" class="close">&times;</span>
         <img class="modal-content" id="img01">
         <div id="caption"></div>
     </div>
 
-    <div id="myModal2" class="modal">
+    <div id="myModal2" class="modal" style="display: none">
         <span id="span2" class="close">&times;</span>
         <img class="modal-content" id="img02">
         <div id="caption1"></div>
     </div>
 
-    <div id="myModal3" class="modal">
+    <div id="myModal3" class="modal" style="display: none">
         <span id="span3" class="close">&times;</span>
-        <img class="modal-content" id="img013">
+        <img class="modal-content" id="img03">
         <div id="caption2"></div>
     </div>
 </html>

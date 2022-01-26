@@ -101,6 +101,18 @@ class TestService
         return true;
     }
 
+    /**
+     * Метод добавления вопросов к назначенному тесту
+     * @param $id
+     * @param $questions_count
+     * @param $tests
+     */
+    public function deleteAssigenTestQuestion($id)
+    {
+        AdminAssignTestQuestion::deleteAssignQuestion($id);
+        return true;
+    }
+
 
     /**
      * Метод записи выбранных ответов

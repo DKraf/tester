@@ -33,6 +33,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::prefix('admin')->group(function () {
         Route::get('/testhistory/{id}', [AssigenTestController::class, 'testsHistoryShow'])->name('testhistoryshow');
+        Route::get('/refresh-test/{id}', [AssigenTestController::class, 'refreshTest'])->name('refreshtest');
         Route::get('/testhistory', [AssigenTestController::class, 'testsHistory'])->name('testhistory');
         Route::get('/reset-password/{id}', [UserController::class, 'resetPassword'])->name('resetpassword');
         Route::get('/edit-index', [HomePageController::class, 'index'])->name('editindex');
