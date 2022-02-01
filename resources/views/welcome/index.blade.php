@@ -56,7 +56,7 @@
                     <div class="card h-100">
                         <div class="card-body">
                             <h2 class="card-title">{{ $data->h3 }}</h2>
-                            <img id="myImg1" src={{asset('storage/image1.jpg')}}  style="width:100%;max-width:300px">
+                            <img id="myImg1" src={{Storage::url($data->image1)}}  style="width:100%;max-width:300px">
                             <p class="card-text">{{ $data->t3 }}</p>
                         </div>
                     </div>
@@ -65,7 +65,7 @@
                     <div class="card h-100">
                         <div class="card-body">
                             <h2 class="card-title">{{ $data->h4 }}</h2>
-                            <img id="myImg2" src={{asset('storage/image2.jpg')}}  style="width:100%;max-width:300px">
+                            <img id="myImg2" src={{Storage::url($data->image2)}}  style="width:100%;max-width:300px">
                             <p class="card-text">{{ $data->t4 }}</p>
                         </div>
                     </div>
@@ -74,7 +74,7 @@
                     <div class="card h-100">
                         <div class="card-body">
                             <h2 class="card-title">{{ $data->h5 }}</h2>
-                            <img id="myImg3" src={{asset('storage/image3.jpg')}}  style="width:100%;max-width:300px">
+                            <img id="myImg3" src={{Storage::url($data->image3)}}  style="width:100%;max-width:300px">
                             <p class="card-text">{{ $data->t5 }}</p>
                         </div>
                     </div>

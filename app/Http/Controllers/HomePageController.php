@@ -42,25 +42,23 @@ class HomePageController extends Controller
     public function update(Request $request)
     {
 
-        $image1 = $image2 = $image3 = null;
-        $path = 'storage/';
-        if (isset($request->image1)) {
-            $name = 'image1';
-            $image1 = $this->uploadImage($request->image1, $name);
+        if ($request->has('image1')) {
+            $file = $request->file('image1');
+            $image1 = $this->uploadImage($file, $file->getClientOriginalName());
         }
-        if (isset($request->image2)) {
-            $name = 'image2';
-            $image2 = $this->uploadImage($request->image2, $name);
+        if ($request->has('image2')) {
+            $file = $request->file('image2');
+            $image2 = $this->uploadImage($file, $file->getClientOriginalName());
         }
-        if (isset($request->image3)) {
-            $name = 'image3';
-            $image3 = $this->uploadImage($request->image3, $name);
+        if ($request->has('image3')) {
+            $file = $request->file('image3');
+            $image3 = $this->uploadImage($file, $file->getClientOriginalName());
         }
 
         $request = $request->all();
-        $request['image1'] = ($image1) ? $path.$image1 : null;
-        $request['image2'] = ($image2) ? $path.$image2 : null;
-        $request['image3'] = ($image3) ? $path.$image3 : null;
+        $request['image1'] = $image1 ?? null;
+        $request['image2'] = $image2 ?? null;
+        $request['image3'] = $image3 ?? null;
 
         $save_data = array_filter($request);
 
